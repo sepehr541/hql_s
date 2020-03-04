@@ -1,1 +1,2 @@
-hql_s/node_modules/*.*
+#dependecies
+/node_modules
