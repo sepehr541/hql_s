@@ -5,7 +5,7 @@ CREATE TABLE Parking (
 Create TABLE Room (
         ID INTEGER PRIMARY KEY,
         Capacity INTEGER,
-        BedType CHAR VARYING (20),
+        BedType CHAR VARYING (20)
 );
 
 Create TABLE Visitor (
@@ -27,27 +27,28 @@ Create TABLE Recreational (
             
 );
 
-Create TABLE Restaurant (
-            Name CHAR(20) PRIMARY KEY,
-            CuisineStyle CHAR(20) FOREIGN KEY REFERENCES Food 
-            ON DELETE CASCADE ON UPDATE CASCADE NOT NULL,
- );
-
  Create TABLE Food (
             CuisineStyle CHAR(20) PRIMARY KEY,
-            Category CHAR(20),
+            Category CHAR(20)
  );
+
+Create TABLE Restaurant (
+            Name CHAR(20) PRIMARY KEY,
+            CuisineStyle CHAR(20)  REFERENCES Food (CuisineStyle) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL
+ );
+
+
 
  Create TABLE Customer_Service (
             ID INTEGER,
             Type CHAR(20),
-            Hours INTEGER,
+            Hours INTEGER
 );
 
 Create TABLE RoomEssentials (
             itemID INTEGER,
             Name CHAR(20),
-            Price INTEGER,
+            Price INTEGER
 );
 
 
