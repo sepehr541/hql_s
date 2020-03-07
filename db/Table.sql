@@ -34,7 +34,9 @@ Create TABLE Recreational (
 
 Create TABLE Restaurant (
             Name CHAR(20) PRIMARY KEY,
-            CuisineStyle CHAR(20)  REFERENCES Food (CuisineStyle) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL
+            CuisineStyle CHAR(20) NOT NULL,
+            FOREIGN KEY(CuisineStyle) REFERENCES food (CuisineStyle) ON DELETE CASCADE ON UPDATE CASCADE
+            
  );
 
 
