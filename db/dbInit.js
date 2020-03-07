@@ -1,19 +1,9 @@
 const { Pool } = require('pg');
-const USERNAME = 'postgres';
-const HOST = 'localhost';
-const DB = 'postgres';
-const PWD = 'docker';
-const PORT = 5432;
-
+const auth=require("../public/auth/auth")
 // Connection to PostgreSQL on Docker container
 // TODO
-const pool = new Pool({
-    user: USERNAME,
-    host: HOST,
-    database: DB,
-    password: PWD,
-    port: PORT,
-})
+
+const pool = new Pool(auth);
 
 
 exports.pool = pool;

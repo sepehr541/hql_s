@@ -29,7 +29,7 @@ function InitializeTables() {
         `Create TABLE Room (
         ID INTEGER PRIMARY KEY,
         Capacity INTEGER,
-        BedType CHAR 20,
+        BedType CHAR 20
         )`,
         (err, result) => {
             if (err) {
@@ -70,7 +70,7 @@ function InitializeTables() {
             ID INTEGER PRIMARY KEY,
             Name CHAR(20),
             Salary INTEGER,
-            Position CHAR(20),
+            Position CHAR(20)
         )`,
         (err, result) => {
             if (err) {
@@ -84,7 +84,7 @@ function InitializeTables() {
     pool.query(
         `Create TABLE Recreational (
             ID INTEGER PRIMARY KEY,
-            Type CHAR(20),
+            Type CHAR(20)
         )`,
         (err, result) => {
             if (err) {
@@ -98,7 +98,7 @@ function InitializeTables() {
             Name CHAR(20) PRIMARY KEY,
             CuisineStyle CHAR(20) FORIEGN KEY REFERENCES Food NOT NULL,
             On Delete Cascade,
-            On Update Cascade,
+            On Update Cascade
             )`,
         (err, result) => {
             if (err) {
@@ -133,11 +133,11 @@ function InitializeTables() {
     );
 
     pool.query(
-        `Create TABLE RoomEssentials {
+        `Create TABLE RoomEssentials (
             itemID INTEGER,
             Name CHAR(20),
             Price INTEGER,
-            }`,
+            )`,
         (err, result) => {
             if (err) {
                 console.log(err.stack);
