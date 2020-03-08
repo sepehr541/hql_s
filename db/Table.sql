@@ -77,7 +77,7 @@ Create TABLE Visitor_Uses_Services (
             usage_Date DATE,
             PRIMARY KEY (VistorID ,Service_ID),
             FOREIGN KEY (VisitorID) references Visitor,
-            FOREIGN KEY (ServiceID) references on Delete Cascade ON Update Cascade
+            FOREIGN KEY (ServiceID) references Customer_Service on Delete Cascade ON Update Cascade
 )
 
 Create TABLE Reservation_Has_Assigned_Parking (
