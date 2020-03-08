@@ -11,7 +11,7 @@ Create TABLE Room (
 Create TABLE Visitor (
         Visitor_ID INTEGER PRIMARY KEY,
         CardNumber INTEGER,
-        Name VARCHAR(20)
+        Name VARCHAR(25)
  );
 
  Create TABLE Employee (
