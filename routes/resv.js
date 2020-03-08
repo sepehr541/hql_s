@@ -4,9 +4,9 @@ const route=express.Router()
 
 let datas=null
 route.post("/",async(req,res)=>{
-    const data= await req.body
-    datas=data
-    console.log(data);
+    let {start, end, people}=req.query
+    
+    
 })
 
 
