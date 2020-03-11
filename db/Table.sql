@@ -5,7 +5,7 @@ CREATE TABLE Parking (
 Create TABLE Room (
         ID INTEGER PRIMARY KEY,
         Capacity INTEGER,
-        BedType CHAR VARYING (20)
+        BedType CHAR(20)
 );
 
 Create TABLE Visitor (
@@ -42,9 +42,11 @@ Create TABLE Restaurant (
 
 
  Create TABLE Customer_Service (
-            ID INTEGER,
+            ID INTEGER ,
             Type CHAR(20),
-            Hours INTEGER
+            Hours INTEGER,
+            PRIMARY KEY (ID)
+
 );
 
 Create TABLE RoomEssentials (
@@ -59,7 +61,7 @@ Create TABLE Reservation (
             EndDate DATE,
             Price INTEGER,
             vCount INTEGER
-)
+);
 
 Create TABLE Visitor_Reservation (
             Visitor_ID INTEGER,
@@ -69,53 +71,55 @@ Create TABLE Visitor_Reservation (
             Foreign Key (Reservation_ID) references Reservation
             ON Delete Cascade
             On Update Cascade
-)
+);
 
 Create TABLE Visitor_Uses_Services (
             VisitorID INTEGER,
             ServiceID INTEGER,
             usage_Date DATE,
-            PRIMARY KEY (VistorID ,Service_ID),
+            PRIMARY KEY (VisitorID , ServiceID),
             FOREIGN KEY (VisitorID) references Visitor,
-            FOREIGN KEY (ServiceID) references Customer_Service on Delete Cascade ON Update Cascade
-)
+            FOREIGN KEY (ServiceID) references Customer_Service 
+            ON Delete Cascade 
+            ON Update Cascade
+);
 
 Create TABLE Reservation_Has_Assigned_Parking (
             Pnum INTEGER,
             ReservationID INTEGER,
-            Primary Key (Pnum, Reservation_ID),
+            Primary Key (Pnum, ReservationID),
             Foreign Key (Pnum) references Parking,
             Foreign Key (ReservationID) references Reservation
             ON Delete Cascade
             ON Update Cascade
-)
+);
 
 Create TABLE Employees_Host_Events (
             Employee_ID INTEGER,
-            EventID INTEGER,
-            Primary Key (Employee_ID, EventID),
-            Foreign Key (Employee_ID) references Employee,
-            Foreign Key (EventID) references Event
-            ON Delete Cascade
-            ON Update Cascade
-)
+        --     EventID INTEGER,
+            Primary Key (Employee_ID),
+            Foreign Key (Employee_ID) references Employee
+        --     Foreign Key (EventID) references Event
+        --     ON Delete Cascade
+        --     ON Update Cascade
+);
 
 Create TABLE Reservation_Room (
             Room_Number INTEGER,
-            Reservation_ID INTEGER
+            Reservation_ID INTEGER,
             PRIMARY KEY (Room_Number , Reservation_ID),
             FOREIGN key (Room_Number) references Room,
             Foreign key (Reservation_ID) references Reservation
-            On Delete Cascade
-            On Update Cascade
-)
+            ON Delete Cascade
+            ON Update Cascade
+);
 
 Create TABLE Employee_Works_In (
             Employee_ID INTEGER,
             Service_ID INTEGER,
             Primary Key (Employee_ID, Service_ID),
             FOREIGN Key (Employee_ID) references Employee,
-            FOREIGN Key (Service_ID) references Customers_Service
-            On Delete Cascade
-            On Update Cascade
-)
+            FOREIGN Key (Service_ID) references Customer_Service
+            ON Delete Cascade
+            ON Update Cascade
+);
