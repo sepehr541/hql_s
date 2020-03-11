@@ -4,8 +4,8 @@ CREATE TABLE Parking (
 
 Create TABLE Room (
         ID INTEGER PRIMARY KEY,
-        Capacity INTEGER,
-        BedType CHAR(20)
+        Capacity INTEGER NOT NULL,
+        BedType CHAR VARYING (20) NOT NULL
 );
 
 Create TABLE Visitor (
@@ -39,8 +39,6 @@ Create TABLE Restaurant (
             
  );
 
-
-
  Create TABLE Customer_Service (
             ID INTEGER ,
             Type CHAR(20),
@@ -57,20 +55,20 @@ Create TABLE RoomEssentials (
 
 Create TABLE Reservation (
             Reservation_ID INTEGER PRIMARY KEY,
-            StartDate DATE,
-            EndDate DATE,
-            Price INTEGER,
-            vCount INTEGER
-);
+            StartDate DATE NOT NULL,
+            EndDate DATE NOT NULL,
+            Price INTEGER NOT NULL,
+            pCount INTEGER NOT NULL
+)
 
-Create TABLE Visitor_Reservation (
+CREATE TABLE Visitor_Reservation (
             Visitor_ID INTEGER,
             Reservation_ID INTEGER,
             Primary Key(Visitor_ID, Reservation_ID),
             FOREIGN Key (Visitor_ID) references Visitor,
             Foreign Key (Reservation_ID) references Reservation
             ON Delete Cascade
-            On Update Cascade
+            ON Update Cascade
 );
 
 Create TABLE Visitor_Uses_Services (
