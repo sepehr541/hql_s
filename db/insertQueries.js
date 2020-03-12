@@ -1,6 +1,6 @@
 const { pool } = require('./dbConnect');
 const { Room, defaultCallback, Reservation } = require('./dbConstants');
-const { makeRoomValues } = require('./dbValueMaker');
+const { makeRoomValues, makeResvValues } = require('./dbValueMaker');
 const moment = require('moment');
 
 /**
