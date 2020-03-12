@@ -12,7 +12,7 @@ const insertIntoTable = (table, data) => {
     pool.query(`INSERT INTO ${table} VALUES ${data}`, defaultCallback);
 }
 
-p
+
 
 
 
