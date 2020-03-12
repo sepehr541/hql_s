@@ -5,7 +5,7 @@ const url = require('url');
 const querystring = require('querystring');
 
 router.get("/", async (req,res,next) => {
-    // let rooms  = await;
+    
 });
 
 module.exports = router;
