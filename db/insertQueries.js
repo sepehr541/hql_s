@@ -2,7 +2,7 @@ const { pool } = require('./dbConnect');
 const { Room, defaultCallback, Reservation } = require('./dbConstants');
 const {makeReservValues,makeRoomValues}   = require('./dbValueMaker');
 const moment = require('moment');
-
+const momentRandom = require('moment-random');
 /**
  * insert values into a specific table
  * @param {String} table 
@@ -11,10 +11,6 @@ const moment = require('moment');
 const insertIntoTable = (table, data) => {
     pool.query(`INSERT INTO ${table} VALUES ${data}`, defaultCallback);
 }
-
-
-
-
 
 
 /**
@@ -56,3 +52,11 @@ const insertReservation  = (id, StartDate, EndDate, price, pCount) => {
     insertIntoTable(Reservation, makeReservValues(id, StartDate, EndDate, price, pCount));
 }
 
+
+for (let i = 0; i  < 13; i++) {
+    insertReservation(Math.floor(Math.random() * 10000), 
+    momentRandom("2020-03-07", "2020-03-01"), 
+    momentRandom("2020-03-15", "2020-03-10"), 
+    Math.floor(Math.random() * 10000), 
+    Math.floor(Math.random() * 5));
+}
