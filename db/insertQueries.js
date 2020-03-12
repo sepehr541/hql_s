@@ -1,6 +1,6 @@
 const { pool } = require('./dbConnect');
 const { Room, defaultCallback, Reservation } = require('./dbConstants');
-// const { makeRoomValues } = require('./dbValueMaker');
+const  makeRoomValues  = require('./dbValueMaker');
 const moment = require('moment');
 
 /**
@@ -9,13 +9,11 @@ const moment = require('moment');
  * @param {String} data 
  */
 const insertIntoTable = (table, data) => {
-    pool.query(`INSERT INTO ${table} VALUES`+data, defaultCallback);
+    pool.query(`INSERT INTO ${table} VALUES ${data}`, defaultCallback);
 }
 
 
-const makeRoomValues = (id, cap, bedtype) => {
-    return `(${id}, ${cap}, ${bedtype})`
-}
+
 
 /**
  * Insert a room into the DB
@@ -27,8 +25,7 @@ const insertRoom = (id, cap, bedtype) => {
     insertIntoTable(Room, makeRoomValues(id, cap, bedtype));
 }
 
-
-insertRoom( 123, 3, 'queen' )
+insertRoom( 223, 3, "queen" )
 
 /**
  * Insert a reservation into the table
