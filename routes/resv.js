@@ -5,11 +5,14 @@ const route=express.Router()
 
 let datas
 route.post("/",async(req,res)=>{
-    const data=await req.body
-    datas=JSON.parse(data)
-    let {start ,end , people}= datas
-    console.log(start);
-   pool.query( 'select ')    
+    try{
+        const data=await req.body
+        let {start ,end , people}= data
+        
+    }catch(e){
+        console.log(e);
+    }
+
 })
 
 // route.get("/" , (req,res)=>{
