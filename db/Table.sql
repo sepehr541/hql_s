@@ -41,11 +41,9 @@ Create TABLE Restaurant (
 );
 
 Create TABLE CustomerService (
-            ID INTEGER ,
+            ID INTEGER PRIMARY KEY,
             Type CHAR(20),
-            Hours INTEGER,
-            PRIMARY KEY (ID)
-
+            Hours INTEGER
 );
 
 Create TABLE RoomEssentials (
@@ -78,7 +76,7 @@ Create TABLE VisitorUsesServices (
             usage_Date DATE,
             PRIMARY KEY (VisitorID , ServiceID),
             FOREIGN KEY (VisitorID) references Visitor,
-            FOREIGN KEY (ServiceID) references Customer_Service 
+            FOREIGN KEY (ServiceID) references CustomerService 
             ON Delete Cascade 
             ON Update Cascade
 );
