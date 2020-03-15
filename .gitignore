@@ -4,3 +4,8 @@
 =3.1.1
 
 /public/auth/
+
+runpost
+checkpost
+
+.gitignore
