@@ -6,6 +6,6 @@
 /public/auth/
 
 runpost
-checkpost
+check
 
 .gitignore
