@@ -59,7 +59,7 @@ Create TABLE Reservation (
             EndDate DATE NOT NULL,
             Price INTEGER NOT NULL,
             pCount INTEGER NOT NULL
-)
+);
 
 CREATE TABLE Visitor_Reservation (
             Visitor_ID INTEGER,
@@ -105,7 +105,7 @@ Create TABLE Employees_Host_Events (
 Create TABLE Reservation_Room (
             Room_Number INTEGER,
             Reservation_ID INTEGER,
-            PRIMARY KEY (Room_Number , Reservation_ID),
+            PRIMARY KEY (Room_Number),
             FOREIGN key (Room_Number) references Room,
             Foreign key (Reservation_ID) references Reservation
             ON Delete Cascade

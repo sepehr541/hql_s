@@ -18,7 +18,7 @@ const Reservation_has_Parking = "Reservation_has_Parking(Pnum, ReservationID)";
 const Employee_host_Event = "Employee_host_Event(EmployeeID, EventID)";
 const Reservation_Room = "Reservation_Room(RoomNumber, ReservationID)";
 const Employee_Works_In = "Employee_Works_In(EmployeeID, ServiceID)";
-const Reservation  = "Reservation(Reservation_ID, StartDate, EndDate, Price, vCount)"
+const Reservation  = "Reservation(Reservation_ID, StartDate, EndDate, Price, pcount)"
 
 /**
  * default callback for testing queries
