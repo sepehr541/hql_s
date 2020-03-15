@@ -1,5 +1,5 @@
 const {pool} = require("./dbConnect")
-const { defaultCallback } = require('./dbConstants');
+const { defaultCallback, Reservation, Reservation_Room, Room } = require('./dbConstants');
 
 
 var drop_All_tables=()=>{
@@ -9,12 +9,12 @@ var drop_All_tables=()=>{
     })
 }
 
-// drop_All_tables()
+//drop_All_tables();
 
 /**
  * drops a given table from db
  * @param {String} table table's name or imported const from dbConstants 
  */
 const dropTable = async (table) => {
-    pool.query(`drop table ${table.split("(", 1)}`, defaultCallback)
+    pool.query(`DROP TABLE ${table.split("(", 1)}`, defaultCallback)
 }

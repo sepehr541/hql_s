@@ -54,7 +54,7 @@ Create TABLE RoomEssentials (
 );
 
 Create TABLE Reservation (
-            Reservation_ID INTEGER PRIMARY KEY,
+            ReservationID INTEGER PRIMARY KEY,
             StartDate DATE NOT NULL,
             EndDate DATE NOT NULL,
             Price INTEGER NOT NULL,
@@ -103,11 +103,11 @@ Create TABLE Employees_Host_Events (
 );
 
 Create TABLE Reservation_Room (
-            Room_Number INTEGER,
-            Reservation_ID INTEGER,
-            PRIMARY KEY (Room_Number),
-            FOREIGN key (Room_Number) references Room,
-            Foreign key (Reservation_ID) references Reservation
+            ReservationID INTEGER,
+            RoomNumber INTEGER,
+            PRIMARY KEY (RoomNumber, ReservationID),
+            FOREIGN key (RoomNumber) references Room,
+            Foreign key (ReservationID) references Reservation
             ON Delete Cascade
             ON Update Cascade
 );
