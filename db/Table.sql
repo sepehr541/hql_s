@@ -53,11 +53,12 @@ Create TABLE RoomEssentials (
 );
 
 Create TABLE Reservation (
-            ReservationID INTEGER PRIMARY KEY,
+            ReservationID SERIAL INTEGER PRIMARY KEY,
             StartDate DATE NOT NULL,
             EndDate DATE NOT NULL,
             Price INTEGER NOT NULL,
-            pCount INTEGER NOT NULL
+            pCount INTEGER NOT NULL,
+            CreatedAt TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
 CREATE TABLE VisitorReservation (

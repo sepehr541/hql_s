@@ -2,7 +2,7 @@ const { pool } = require('./dbConnect');
 const { Room, defaultCallback, Reservation, ReservationRoom } = require('./dbConstants');
 const { makeReservValues, makeRoomValues, makeResev_RoomValues } = require('./dbValueMaker');
 const moment = require('moment');
-const momentRandom = require('moment-random');
+
 /**
  * insert values into specified table
  * @param {String} table 
@@ -39,33 +39,6 @@ const insertRoomResv = (resvID, roomID) => {
     insertIntoTable(ReservationRoom, makeResev_RoomValues(resvID, roomID))   
 }
 
-var FindingAvailableRooms = async (start, end, people) => {
-    let available_rooms = []
-    try {
-        const first_res = await pool.query(
-           `select id roomnumber from room 
-            where room.capacity = ${people}  AND not exists (
-                select * from reservationroom 
-                where room.id = reservationroom.roomnumber)`);
-        console.log(first_res.rows);
-        first_res.rows.length == 0 ? null : available_rooms = available_rooms.concat(first_res.rows);
-        const resp = await pool.query(
-            `select rr.roomnumber
-            from reservationroom rr  
-            join  Reservation res 
-            on rr.reservationid = res.reservationid AND (('${start}' :: date  >= res.enddate) OR (res.startdate >= '${end}':: date)) 
-            join room 
-            on room.id = rr.RoomNumber AND (res.pcount = ${people});`);
-        console.log(resp.rows);
-        available_rooms = available_rooms.concat(resp.rows);
-    } catch (e) {
-        console.log(e);
-    } finally {
-        return available_rooms;
-    }
-}
-
-
 
 // TESTING
 // insertRoom(1, 3, "King");
@@ -86,8 +59,20 @@ var FindingAvailableRooms = async (start, end, people) => {
 // insertRoomResv(3, 5);
 // insertRoomResv(4, 4);
 // insertRoomResv(5, 6);
-FindingAvailableRooms('2020-03-12', '2020-03-13', 1).then((res) => {console.log(res);})
+
+const saveReservation = () => {
+    pool.query(
+        `BEGIN TRY
+            BEGIN TRANSACTION
+
+            END TRANSACTION
+         END TRY
+         BEGIN CATCH
+         END CATCH`
+    )
+}
+
 
 module.exports = {
-    FindingAvailableRooms
+
 }
