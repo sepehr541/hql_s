@@ -18,7 +18,7 @@ const FindingAvailableRooms = async (start, end, people) => {
                 where room.id = reservationroom.roomnumber)
             UNION
             select rr.roomnumber, room.bedtype, pr.price
-            from reservationroom rr, room, reservation res , roomprice
+            from reservationroom rr, room, reservation res , roomprice pr
             where rr.reservationid = res.reservationid 
                 AND (('${start}' :: date  >= res.enddate) OR (res.startdate >= '${end}':: date)) 
                 AND room.id = rr.RoomNumber 
