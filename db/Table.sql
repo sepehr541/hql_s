@@ -125,4 +125,4 @@ Create TABLE EmployeeWorksIn (
 Create Table RoomPrice (
     roomType VARCHAR(20) NOT NULL,
     Price REAL NOT NULL
-)
+);
