@@ -57,7 +57,8 @@ Create TABLE Reservation (
             StartDate DATE NOT NULL,
             EndDate DATE NOT NULL,
             Price INTEGER NOT NULL,
-            pCount INTEGER NOT NULL
+            pCount INTEGER NOT NULL,
+            CreatedAt TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
 CREATE TABLE VisitorReservation (

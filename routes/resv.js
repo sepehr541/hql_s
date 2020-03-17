@@ -1,20 +1,17 @@
 const express=require("express")
-const { pool } = require('../db/dbConnect');
 const moment = require('moment');
-const {FindingAvailableRooms} =require('../db/insertQueries')
-const chalk=require('chalk')
-const route=express.Router()
+const { FindingAvailableRooms } = require('../db/insertQueries');
+const route = express.Router();
 
 
 let datas=[]
-route.post("/",async(req,res)=>{
-  const data = await req.body
-  const start = await data.start.slice(0,10)
-  const end =await data.end.slice(0,10)
-  const people=  parseInt(data.people)
-  datas=await FindingAvailableRooms(start,end,people)
+route.post("/", async(req,res) => {
+  const start = moment(req.body.start.slice(0,10))
+  const end = moment(req.body.end.slice(0,10))
+  const room = parseInt(req.body.room);
+  const people = parseInt(req.body.people)
+  datas = await FindingAvailableRooms(start, end, people)
   res.send(datas)
-
 })
 
 route.get("/" , (req,res)=>{
@@ -26,4 +23,4 @@ route.get("/" , (req,res)=>{
 
 
 
-module.exports=route
+module.exports = route;
