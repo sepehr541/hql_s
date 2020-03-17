@@ -121,3 +121,8 @@ Create TABLE EmployeeWorksIn (
             ON Delete Cascade
             ON Update Cascade
 );
+
+Create Table RoomPrice (
+    roomType VARCHAR(20) NOT NULL,
+    Price REAL NOT NULL
+)
