@@ -7,5 +7,5 @@
 
 runpost
 check
-
+psql
 .gitignore

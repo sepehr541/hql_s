@@ -78,7 +78,7 @@ Create TABLE VisitorUsesServices (
             usage_Date DATE,
             PRIMARY KEY (VisitorID , ServiceID),
             FOREIGN KEY (VisitorID) references Visitor,
-            FOREIGN KEY (ServiceID) references Customer_Service 
+            FOREIGN KEY (ServiceID) references CustomerService 
             ON Delete Cascade 
             ON Update Cascade
 );

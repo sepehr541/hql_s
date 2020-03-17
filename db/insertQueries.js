@@ -49,12 +49,12 @@ var FindingAvailableRooms = async (start, end, people) => {
                 where room.id =reservation_room.roomnumber)`);
         first_res.rows.length == 0 ? null : available_rooms = available_rooms.concat(first_res.rows);
         const resp = await pool.query(
-            `select ro.room_number, res.reservation_id, roo.bedtype, res.price
-            from reservation_room ro  
+            `select ro.roomnumber, res.reservationid, roo.bedtype, res.price
+            from reservationroom ro  
             join  Reservation res  
-            on ro.reservation_id=res.reservation_id AND (('${start}' :: date  >= res.enddate) OR (res.startdate >= '${end}':: date)) 
+            on ro.reservationid=res.reservationid AND (('${start}' :: date  >= res.enddate) OR (res.startdate >= '${end}':: date)) 
             join room roo 
-            on roo.id=ro.Room_Number and (res.pcount=${people});`);
+            on roo.id=ro.RoomNumber and (res.pcount=${people});`);
         available_rooms = available_rooms.concat(resp.rows);
         return available_rooms;
     } catch (e) {
