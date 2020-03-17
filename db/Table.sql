@@ -41,11 +41,9 @@ Create TABLE Restaurant (
 );
 
 Create TABLE CustomerService (
-            ID INTEGER ,
+            ID INTEGER PRIMARY KEY,
             Type CHAR(20),
-            Hours INTEGER,
-            PRIMARY KEY (ID)
-
+            Hours INTEGER
 );
 
 Create TABLE RoomEssentials (

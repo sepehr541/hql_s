@@ -16,7 +16,7 @@ const VisitorUsesService = "VisitorUsesService(VisitorID, ServiceID, Date)";
 const RoomHasRoomEssentials = "RoomHasRoomEssentials(RoomNumber, ItemID, NumberOfItem)";
 const ReservationHasParking = "ReservationHasParking(Pnum, ReservationID)";
 const EmployeeHostEvent = "EmployeeHostEvent(EmployeeID, EventID)";
-const ReservationRoom = "ReservationRoom(ReservationID, RoomID)";
+const ReservationRoom = "ReservationRoom(ReservationID, RoomNumber)";
 const EmployeeWorksIn = "EmployeeWorksIn(EmployeeID, ServiceID)";
 const Reservation  = "Reservation(ReservationID, StartDate, EndDate, Price, pcount)"
 
