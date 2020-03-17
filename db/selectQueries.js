@@ -17,12 +17,13 @@ const FindingAvailableRooms = async (start, end, people) => {
                 select * from reservationroom 
                 where room.id = reservationroom.roomnumber)
             UNION
-            select rr.roomnumber, room.bedtype
-            from reservationroom rr, room, reservation res 
+            select rr.roomnumber, room.bedtype, pr.price
+            from reservationroom rr, room, reservation res , roomprice
             where rr.reservationid = res.reservationid 
                 AND (('${start}' :: date  >= res.enddate) OR (res.startdate >= '${end}':: date)) 
                 AND room.id = rr.RoomNumber 
-                AND (res.pcount = ${people});`);
+                AND (res.pcount = ${people})
+                AND pr.roomtype=room.bedtype`);
         available_rooms = resp.rows;
     } catch (e) {
         console.log(e);
