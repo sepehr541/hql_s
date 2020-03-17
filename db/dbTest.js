@@ -31,11 +31,11 @@ const { pool } = require('./dbInit')
 //   }
 // })
 
-pool.query(`SELECT * FROM test`, (err, result) => {
-    if (err) {
-      return console.log(err.stack);
-    } 
-    else {
-      console.log(result.rows);
-    }
-})
+// pool.query(`SELECT * FROM test`, (err, result) => {
+//     if (err) {
+//       return console.log(err.stack);
+//     } 
+//     else {
+//       console.log(result.rows);
+//     }
+// })

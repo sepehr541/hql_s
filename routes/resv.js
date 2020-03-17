@@ -8,6 +8,7 @@ let datas=[]
 route.post("/", async(req,res) => {
   const start = moment(req.body.start.slice(0,10))
   const end = moment(req.body.end.slice(0,10))
+  const room = parseInt(req.body.room);
   const people = parseInt(req.body.people)
   datas = await FindingAvailableRooms(start, end, people)
   res.send(datas)

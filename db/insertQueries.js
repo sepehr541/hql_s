@@ -60,16 +60,13 @@ const insertRoomResv = (resvID, roomID) => {
 // insertRoomResv(4, 4);
 // insertRoomResv(5, 6);
 
-const saveReservation = () => {
+const saveReservation = async (roomNumber, resvid, startDate, endDate, price, pcount) => {
     pool.query(
-        `BEGIN TRY
-            BEGIN TRANSACTION
-
-            END TRANSACTION
-         END TRY
-         BEGIN CATCH
-         END CATCH`
-    )
+        `BEGIN;
+           INSERT INTO reservation VALUES (${resvid}, '${startDate}', '${endDate}', ${price}, ${pcount});
+           INSERT INTO reservationroom VALUES (${resvid}, ${roomNumber});
+        END;`,
+    defaultCallback);
 }
 
 

@@ -53,7 +53,7 @@ Create TABLE RoomEssentials (
 );
 
 Create TABLE Reservation (
-            ReservationID SERIAL INTEGER PRIMARY KEY,
+            ReservationID INTEGER PRIMARY KEY,
             StartDate DATE NOT NULL,
             EndDate DATE NOT NULL,
             Price INTEGER NOT NULL,
