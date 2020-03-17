@@ -23,8 +23,7 @@ const FindingAvailableRooms = async (start, end, people) => {
                 AND (('${start}' :: date  >= res.enddate) OR (res.startdate >= '${end}':: date)) 
                 AND room.id = rr.RoomNumber 
                 AND (res.pcount = ${people});`);
-        console.log(resp.rows);
-        available_rooms = available_rooms.concat(resp.rows);
+        available_rooms = resp.rows;
     } catch (e) {
         console.log(e);
     } finally {
