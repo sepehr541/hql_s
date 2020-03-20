@@ -33,8 +33,6 @@ const FindingAvailableRooms = async (start, end, people) => {
         //im fixing it using js and i did some research where people say its more convinient and faster  but if you came up with a query /plz include it
 
             let conflictrooms= resp2.rows
-            console.log(available_rooms);
-            console.log(conflictrooms);
             for (available_room of available_rooms){
                 for(room of conflictrooms){
                     if(available_room.roomnumber==room.roomnumber && available_room.reservationid!==room.reservationid){
@@ -48,7 +46,7 @@ const FindingAvailableRooms = async (start, end, people) => {
 
                 }
             }
-            //removing the duplicate rooms from the availablerooms by O(n^2) , we can improve this to nlogn by sorting the array but its takes way more space 
+            //removing the duplicate rooms from the availablerooms by O(n^2) , we can improve this to nlogn by sorting the array but its takes way more meomory space 
             for(let i=0 ;i<available_rooms.length;i++){
                 for(let j=0;j<available_rooms.length;j++){
                     if(available_rooms[i].roomnumber==available_rooms[j].roomnumber){
@@ -74,7 +72,7 @@ const FindingAvailableRooms = async (start, end, people) => {
 }
 
 // TESTING
-FindingAvailableRooms('2020-04-03', '2020-04-06', 1)
+// FindingAvailableRooms('2020-04-03', '2020-04-06', 1)
 
 module.exports = {
     FindingAvailableRooms,
