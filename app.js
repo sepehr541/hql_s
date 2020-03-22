@@ -9,7 +9,6 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var roomsRouter = require('./routes/rooms');
 var cors=require("cors")
-var kos='ks'
 var app = express();
 
 app.use(logger('dev'));
