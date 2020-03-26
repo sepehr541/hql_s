@@ -70,7 +70,8 @@ const saveReservation = async (roomNumber, resvid, startDate, endDate, price, pc
 }
 
 //saveReservation(5, 14, '2020-04-03', '2020-04-06', 650, 1);
-saveReservation(4, 56, '2020-04-03', '2020-04-10', 650, 4);
+//saveReservation(4, 56, '2020-04-03', '2020-04-10', 650, 4);
+saveReservation(123, 14, '2020-04-03', '2020-04-06', 650, 1);
 module.exports = {
 
 }

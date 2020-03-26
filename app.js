@@ -1,4 +1,5 @@
 var createError = require('http-errors');
+var jade = require('jade');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -11,6 +12,7 @@ var roomsRouter = require('./routes/rooms');
 var cors=require("cors")
 
 var app = express();
+app.set('view engine', 'jade')
 
 app.use(logger('dev'));
 app.use(express.json());
