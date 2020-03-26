@@ -4,18 +4,17 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var body_parser=require("body-parser")
-var reservation = require("./routes/resv")
+var reservation = require("./routes/finalReservation")
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var roomsRouter = require('./routes/rooms');
 var confirmedResv=require('./routes/confirmedresv')
 var cors=require("cors")
-
 var app = express();
 
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');app.use(logger('dev'));
+app.use(logger('dev'));
 app.use(express.json());
 app.use(cors())
 app.use(body_parser.json())
@@ -26,8 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api/rooms', roomsRouter);
-app.use('/reservation', reservation);
-// app.use('/confirmed',confirmedResv)
+app.use('/Reservation', reservation)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
