@@ -32,6 +32,6 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "constantinople": "^4.0.1"
+   "constantinople": "^4.0.1"
   }
 }

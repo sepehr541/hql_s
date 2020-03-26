@@ -27,7 +27,7 @@ const insertRoom = (id, cap, bedtype) => {
  * Insert a reservation into the table
  * @param {Integer} id 
  * @param {Moment} StartDate 
- * @param {Moment} EndDate 
+ * @param {Moment} EndDate  
  * @param {Integer} price 
  * @param {Integer} pCount 
  */
@@ -70,7 +70,7 @@ const saveReservation = async (roomNumber, resvid, startDate, endDate, price, pc
 }
 
 //saveReservation(5, 14, '2020-04-03', '2020-04-06', 650, 1);
-saveReservation(4, 56, '2020-04-03', '2020-04-10', 650, 4);
+// saveReservation(4, 56, '2020-04-03', '2020-04-10', 650, 4);
 module.exports = {
 
 }
