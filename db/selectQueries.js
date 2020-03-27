@@ -26,7 +26,7 @@ const FindingAvailableRooms = async (start, end, people) => {
                     OR (('${start}':: date <= res.startdate) AND ('${end}':: date >= res.enddate))
                 AND res.pcount = ${people})`);
         available_rooms = resp.rows;
-        console.log(available_rooms);
+        // console.log(available_rooms);
         // const resp2=await pool.query('select rr.roomnumber,rr.reservationid , res.startdate, res.enddate from reservationroom rr join reservation res on res.reservationid=rr.reservationid')
 
         // //im fixing it using js and i did some research where people say its more convinient and faster  but if you came up with a query /plz include it
@@ -84,8 +84,8 @@ const RoomsResvDates = async () => {
     })
 }
 // TESTING
-RoomsResvDates()
-FindingAvailableRooms('2020-04-10', '2020-04-12', 4)
+// RoomsResvDates()
+// FindingAvailableRooms('2020-04-10', '2020-04-11', 1)
 
 module.exports = {
     FindingAvailableRooms,
