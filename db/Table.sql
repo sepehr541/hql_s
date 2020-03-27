@@ -10,8 +10,10 @@ Create TABLE Room (
 
 Create TABLE Visitor (
         VisitorID INTEGER PRIMARY KEY,
-        CardNumber INTEGER,
-        Name VARCHAR(25)
+        -- CardNumber INTEGER,
+        Name VARCHAR(25),
+        EMIAL VARCHAR(40),
+        phone INTEGER
 );
 
 Create TABLE Employee (
