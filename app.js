@@ -8,7 +8,6 @@ var reservation = require("./routes/finalReservation")
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var roomsRouter = require('./routes/rooms');
-var confirmedResv=require('./routes/confirmedresv')
 var cors=require("cors")
 var app = express();
 

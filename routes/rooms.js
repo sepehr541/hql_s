@@ -14,10 +14,6 @@ router.post("/", async (req, res, next) => {
     const end = req.query.end;
     const people = parseInt(req.query.people);
     let rooms = await FindingAvailableRooms(start, end, people)
-    console.log('rooms',rooms)
-    console.log(start)
-    console.log(end)
-    console.log(people)
     datas=rooms
 
     res.send(rooms);
