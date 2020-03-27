@@ -18,7 +18,9 @@ Create TABLE Employee (
             ID INTEGER PRIMARY KEY,
             Name CHAR(20),
             Salary INTEGER,
-            Position CHAR(20)
+            Position CHAR(20),
+            username VARCHAR(100),
+            FOREIGN KEY(username) REFERENCES verifyuser
 );
 
 Create TABLE Recreational (
@@ -58,7 +60,6 @@ Create TABLE Reservation (
             EndDate DATE NOT NULL,
             Price INTEGER NOT NULL,
             pCount INTEGER NOT NULL,
-            CreatedAt TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
 CREATE TABLE VisitorReservation (
@@ -125,4 +126,11 @@ Create TABLE EmployeeWorksIn (
 Create Table RoomPrice (
     roomType VARCHAR(20) NOT NULL,
     Price REAL NOT NULL
+);
+
+
+CREATE TABLE verifyuser (
+    username VARCHAR(100),
+    passwordHash bytea UNIQUE NOT NULL,
+    PRIMARY KEY (username)
 );
