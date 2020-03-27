@@ -12,22 +12,22 @@ const SALTROUNDS = 10;
  * @returns {Promise} resolves to result of authentication
  */
 async function authenticate(username, password) {
-    try {
         // get hashed password from DB
         const queryResult = await pool.query(`
         SELECT passwordHash
         FROM verifyuser
         WHERE username = '${username}'
         `)
+        if (queryResult.rows.length == 0){
+            throw new Error('USER');
+        }
         // extract hash from the query result
         const passwordHash = queryResult.rows[0].passwordhash.toString();
 
         //compare hash and plaintext and return the result
-        const res = await bcrypt.compare(password, passwordHash);
-        return res;
-    } catch (error) {
-        console.log(error);
-    }
+        if (!await bcrypt.compare(password, passwordHash)){
+            throw new Error('PASS');
+        }
 }
 
 
