@@ -60,17 +60,43 @@ const insertRoomResv = (resvID, roomID) => {
 // insertRoomResv(4, 4);
 // insertRoomResv(5, 6);
 
-const saveReservation = async (roomNumber, resvid, startDate, endDate, price, pcount) => {
-    pool.query(
-        `BEGIN;
-           INSERT INTO reservation VALUES (${resvid}, '${startDate}', '${endDate}', ${price}, ${pcount});
-           INSERT INTO reservationroom VALUES (${resvid}, ${roomNumber});
-        END;`,
-    defaultCallback);
+// const saveReservation = async (roomNumber, resvid, startDate, endDate, price, pcount) => {
+//     pool.query(
+//         `BEGIN;
+//            INSERT INTO reservation VALUES (${resvid}, '${startDate}', '${endDate}', ${price}, ${pcount});
+//            INSERT INTO reservationroom VALUES (${resvid}, ${roomNumber});
+//         END;`,
+//     defaultCallback);
+// }
+
+
+var saveReservation= async(name ,start , end, phone , email , roomid , price , people)=>{
+    let reservationId=Math.floor(((roomid*389)/7* new Date().getTime())/(Math.random(1,500)*100000))
+    let visitorID=Math.abs(Math.floor((reservationId*149)^4/(Math.random(1,40)*11)))
+    console.log(reservationId)
+
+    try{
+       const data= await pool.query(`
+       begin;
+        insert into reservation values (${reservationId},'${start}'::date , '${end}'::date , ${price} , ${people} , now() );
+         insert into reservationroom values (${reservationId}, ${roomid});
+         insert into visitor values (${visitorID}, '${name}', ${phone}, '${email}');
+         commit;`)
+         console.log(data)
+         return true
+    } catch (e) {
+        console.log(e);
+    }
 }
+// begin;
+//         insert into reservation values (130,'2020-04-03'::date , '2020-04-10'::date , 7878 , 1 , now() );
+//          insert into reservationroom values (130, 1);
+//          insert into visitor values (1000, 'amir sayyar', '7787517531', 'amirsa@gamil.com');
+//          commit;
+
 
 //saveReservation(5, 14, '2020-04-03', '2020-04-06', 650, 1);
-// saveReservation(4, 56, '2020-04-03', '2020-04-10', 650, 4);
+// saveReservation('amir', '2020-04-03', '2020-04-10', '7787517531', 'amirsa@gamil.com', 1 , 600, 1);
 module.exports = {
     saveReservation
 }
