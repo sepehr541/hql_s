@@ -20,7 +20,7 @@ async function authenticate(username, password) {
         WHERE username = '${username}'
         `)
         // extract hash from the query result
-        const passwordHash = queryResult.rows[0].passwordhash.toString();
+        const passwordHash = await queryResult.rows[0].passwordhash.toString();
 
         //compare hash and plaintext and return the result
         const res = await bcrypt.compare(password, passwordHash);

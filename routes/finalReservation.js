@@ -15,20 +15,19 @@ route.post("/", async(req,res)=>{
     const phone = await data.phone
     const email= await data.email
     const price = await data.totalPrice
-    
     let startDate=start.toString().slice(0,10)
     let endDate=end.toString().slice(0,10)
-    console.log(typeof(name))
-    console.log(typeof(startDate))
-    console.log(typeof(endDate))
-    console.log(phone)
-    console.log(email)
-    console.log(roomid)
-    console.log(typeof(people))
-    console.log(typeof(price))
     let answer= await saveReservation(name , startDate, endDate , phone, email , roomid , price , people)
     console.log(answer)
     res.send({answers:answer})
+    // console.log(typeof(name))
+    // console.log(typeof(startDate))
+    // console.log(typeof(endDate))
+    // console.log(phone)
+    // console.log(email)
+    // console.log(roomid)
+    // console.log(typeof(people))
+    // console.log(typeof(price))
 
 })
 

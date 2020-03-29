@@ -87,6 +87,25 @@ const RoomsResvDates = async () => {
 // RoomsResvDates()
 // FindingAvailableRooms('2020-04-10', '2020-04-11', 1)
 
+const FindingOrderConfirmation=async(orderNumber)=>{
+    try{
+        const data= await pool.query(
+            `select v.name , v.email ,v.phone , res.reservationid,
+            res.startdate , res.enddate , res.price 
+             from visitor v , reservation res , orderconfirmation o
+            where o.ordeconfid=${orderNumber} and 
+            res.reservationid= o.resvid
+             and v.visitorid=o.visid
+            `
+        )
+         return data.rows
+    }catch(e){
+        console.log(e)
+    }
+
+}
+
 module.exports = {
     FindingAvailableRooms,
+    FindingOrderConfirmation
 }
