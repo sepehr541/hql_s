@@ -11,6 +11,7 @@ var usersRouter = require('./routes/users');
 var roomsRouter = require('./routes/rooms');
 var loginRouter = require('./routes/login');
 var {router: restrictedRouter, verifyToken} = require('./routes/restricted');
+var orderconf=require('./routes/orderConf')
 var cors = require("cors")
 var app = express();
 app.set('view engine', 'jade')
@@ -31,6 +32,8 @@ app.use('/api/rooms', roomsRouter);
 app.use('/Reservation', reservation);
 app.use('/api/login', loginRouter);
 app.use('/api/restricted', verifyToken,restrictedRouter);
+app.use('/api/login', loginRouter)
+app.use('/api/orderconf',orderconf)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

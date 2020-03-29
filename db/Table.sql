@@ -49,7 +49,7 @@ Create TABLE Reservation (
             StartDate DATE NOT NULL,
             EndDate DATE NOT NULL,
             Price INTEGER NOT NULL,
-            pCount INTEGER NOT NULL,
+            pCount INTEGER NOT NULL
 );
 
 Create TABLE Visitor (
@@ -89,6 +89,16 @@ Create TABLE ReservationHasAssignedParking (
             Foreign Key (ReservationID) references Reservation
             ON Delete Cascade
             ON Update Cascade
+);
+
+Create TABLE EmployeesHostEvents (
+            EmployeeID INTEGER,
+            EventID INTEGER,
+            Primary Key (EmployeeID),
+            Foreign Key (EmployeeID) references Employee,
+            Foreign Key (EventID) references Event
+            ON Delete Cascade
+            ON Update Cascade 
 );
 
 Create TABLE ReservationRoom (
@@ -145,3 +155,15 @@ CREATE TABLE verifyuser (
     passwordHash bytea UNIQUE NOT NULL,
     PRIMARY KEY (username)
 );
+
+CREATE TABLE OrderConfirmation(
+    ordeconfid INTEGER,
+    resvid INTEGER,
+    visid INTEGER,
+    PRIMARY KEY (ordeconfid,resvid, visid),
+    FOREIGN key (resvid) REFERENCES Reservation,
+    FOREIGN KEY (visid) REFERENCES Visitor
+    ON Delete Cascade
+    ON Update Cascade 
+);
+
