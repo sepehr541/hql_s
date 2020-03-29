@@ -1,5 +1,5 @@
 const {pool} = require("./dbConnect")
-const { defaultCallback, Reservation, Reservation_Room, Room } = require('./dbConstants');
+const { defaultCallback, Reservation, Reservation_Room, Room, Employees } = require('./dbConstants');
 
 
 var drop_All_tables=()=>{
@@ -17,4 +17,35 @@ var drop_All_tables=()=>{
  */
 const dropTable = async (table) => {
     pool.query(`DROP TABLE ${table.split("(", 1)}`, defaultCallback)
+}
+
+const deleteRowWithID = async (table, idcolumn, id) => {
+    try {
+        await pool.query(`DELETE FROM ${table} WHERE ${idcolumn} = ${id}`);
+    } catch (error) {
+       throw error; 
+    }
+}
+
+const deleteEmployee = async (id) => {
+    await deleteRowWithID('employees', 'employeeID', id);
+}
+
+
+const deleteResv = async (id) => {
+    await deleteRowWithID('Reservation', 'reservationID', id);
+}
+
+const deleteEvent = async (id) => {
+    await deleteRowWithID('events', 'eventid', id);
+}
+
+const deleteRoom = async (id) => {
+    await deleteRowWithID('room', 'id', id);
+}
+module.exports = {
+    deleteEmployee,
+    deleteResv,
+    deleteEvent,
+    deleteRoom
 }

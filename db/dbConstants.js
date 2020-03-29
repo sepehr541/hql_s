@@ -1,15 +1,14 @@
-
 /* Table Names */
 const CardInfo = "CardInfo(CreditCard, Name)";
 const Visitor = "Visitor(ID, CreditCard)";
 const Room = "Room(ID, Capacity, BedType)";
 const Parking = "Parking(Pnum)";
-const Employee = "Employee(ID, Name, Salary, Position)";
+const Employees = "Employees(employeeID, name, position, salary)";
 const Recreational = "Recreactional(ID, Type, Hours)";
-const CustomerServise = "CustomerService(ID, Name, Hours)";
+const CustomerServise = "CustomerService(ServiceID, ServiceType, startAt, closesAt)";
 const Food = "Food(CuisineStyle, Category)";
 const Restaurant = "Restaurant(Name, CuisineStyle, Hours)";
-const Events = "Events(EID, Name, StartDate, EndDate)";
+const Events = "Events(eventID, eventName, startDate, endDate)";
 const RoomEssentials = "RoomEssentials(ItemID, Name, Price)";
 const VisitorReservation = "VisitorReservation(VisitorID, ReservationID)";
 const VisitorUsesService = "VisitorUsesService(VisitorID, ServiceID, Date)";
@@ -39,7 +38,7 @@ module.exports = {
     Visitor,
     Room,
     Parking,
-    Employee,
+    Employees,
     Recreational,
     CustomerServise,
     Food,

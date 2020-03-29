@@ -26,38 +26,7 @@ const FindingAvailableRooms = async (start, end, people) => {
                     OR (('${start}':: date <= res.startdate) AND ('${end}':: date >= res.enddate))
                 AND res.pcount = ${people})`);
         available_rooms = resp.rows;
-        // console.log(available_rooms);
-        // const resp2=await pool.query('select rr.roomnumber,rr.reservationid , res.startdate, res.enddate from reservationroom rr join reservation res on res.reservationid=rr.reservationid')
-
-        // //im fixing it using js and i did some research where people say its more convinient and faster  but if you came up with a query /plz include it
-
-        //     let conflictrooms= resp2.rows
-        //     console.log(available_rooms);
-        //     console.log(conflictrooms);
-        //     for (available_room of available_rooms){
-        //         for(room of conflictrooms){
-        //             if(available_room.roomnumber==room.roomnumber && available_room.reservationid!==room.reservationid){
-        //                 if(moment(start).format('YYYY-MM-DD')>=moment(room.enddate).format("YYYY-MM-DD")||moment(room.startdate).format("YYYY-MM-DD")>=moment(end).format("YYYY-MM-DD")){
-        //                     console.log("we chilin");
-        //                 }else {
-        //                     let indx=available_rooms.indexOf(available_room)
-        //                     available_rooms.splice(indx,1)
-        //                 }
-        //             }
-
-        //         }
-        //     }
-        //     //removing the duplicate rooms from the availablerooms by O(n^2) , we can improve this to nlogn by sorting the array but its takes way more space 
-        //     for(let i=0 ;i<available_rooms.length;i++){
-        //         for(let j=0;j<available_rooms.length;j++){
-        //             if(available_rooms[i].roomnumber==available_rooms[j].roomnumber){
-        //                 available_rooms.splice(i,1)
-        //             }
-        //         }
-
-        //     }
-        //     console.log(available_rooms)
-        return available_rooms
+        // return available_rooms
     } catch (e) {
         console.log(e);
     } finally {
@@ -87,6 +56,43 @@ const RoomsResvDates = async () => {
 // RoomsResvDates()
 // FindingAvailableRooms('2020-04-10', '2020-04-11', 1)
 
+
+const getFromDB = async (query) => {
+    try {
+        const res = await pool.query(query);
+        return res.rows;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+/**
+ * Get all employess in alphabetical order
+ */
+const getEmployees = async () => {
+    return await getFromDB(`select * from employees`)
+}
+
+/**
+ * return the reservations' details
+ */
+const getReservations = async () => {
+    return await getFromDB('Select * from reservation')
+}
+
+const getRooms = async () => {
+    return await getFromDB('select * from room')
+}
+
+const getEvents = async () => {
+    return await getFromDB('select * from events')
+}
+
+
 module.exports = {
     FindingAvailableRooms,
+    getEmployees,
+    getReservations,
+    getRooms,
+    getEvents
 }

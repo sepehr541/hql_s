@@ -1,15 +1,18 @@
 const { pool } = require('./dbConnect');
-const { Room, defaultCallback, Reservation, ReservationRoom } = require('./dbConstants');
+const { Room, defaultCallback, Reservation, ReservationRoom, Events, CustomerServise, Employees, EmployeeWorksIn } = require('./dbConstants');
 const { makeReservValues, makeRoomValues, makeResev_RoomValues } = require('./dbValueMaker');
-const moment = require('moment');
-
 /**
  * insert values into specified table
  * @param {String} table 
  * @param {String} data 
  */
-const insertIntoTable = (table, data) => {
-    pool.query(`INSERT INTO ${table} VALUES ${data}`, defaultCallback);
+const insertIntoTable = async (table, data) => {
+    try {
+        pool.query(`INSERT INTO ${table} VALUES ${data}`, defaultCallback);
+    } catch (error) {
+        console.log(error);
+    }
+
 }
 
 
@@ -36,7 +39,7 @@ const insertReservation = (id, StartDate, EndDate, price, pCount) => {
 }
 
 const insertRoomResv = (resvID, roomID) => {
-    insertIntoTable(ReservationRoom, makeResev_RoomValues(resvID, roomID))   
+    insertIntoTable(ReservationRoom, makeResev_RoomValues(resvID, roomID))
 }
 
 
@@ -70,20 +73,20 @@ const insertRoomResv = (resvID, roomID) => {
 // }
 
 
-var saveReservation= async(name ,start , end, phone , email , roomid , price , people)=>{
-    let reservationId=Math.floor(((roomid*389)/7* new Date().getTime())/(Math.random(1,500)*100000))
-    let visitorID=Math.abs(Math.floor((reservationId*149)^4/(Math.random(1,40)*11)))
+var saveReservation = async (name, start, end, phone, email, roomid, price, people) => {
+    let reservationId = Math.floor(((roomid * 389) / 7 * new Date().getTime()) / (Math.random(1, 500) * 100000))
+    let visitorID = Math.abs(Math.floor((reservationId * 149) ^ 4 / (Math.random(1, 40) * 11)))
     console.log(reservationId)
 
-    try{
-       const data= await pool.query(`
+    try {
+        const data = await pool.query(`
        begin;
-        insert into reservation values (${reservationId},'${start}'::date , '${end}'::date , ${price} , ${people} , now() );
+        insert into reservation values (${reservationId},'${start}'::date , '${end}'::date , ${price} , ${people});
          insert into reservationroom values (${reservationId}, ${roomid});
          insert into visitor values (${visitorID}, '${name}', ${phone}, '${email}');
          commit;`)
-         console.log(data)
-         return true
+        console.log(data)
+        return true
     } catch (e) {
         console.log(e);
     }
@@ -97,6 +100,65 @@ var saveReservation= async(name ,start , end, phone , email , roomid , price , p
 
 //saveReservation(5, 14, '2020-04-03', '2020-04-06', 650, 1);
 // saveReservation('amir', '2020-04-03', '2020-04-10', '7787517531', 'amirsa@gamil.com', 1 , 600, 1);
+
+const insertEmployee = async (name, position, service, salary) => {
+    const employeeID = Math.random() * 100000;
+    try {
+        const qres = await pool.query(`select serviceID as id 
+        FROM CustomerService WHERE servicetype = '${service}'`);
+        if (qres.rows.length === 0) {
+            throw new Error('Invalid ServiceID')
+        }
+        const serviceID = qres.rows[0].id;
+        await pool.query(`
+        BEGIN;
+        INSERT INTO ${Employees} VALUES (${employeeID}, '${name}', '${position}', ${salary});
+        INSERT INTO ${EmployeeWorksIn} VALUES(${employeeID}, ${serviceID});
+        END;`)
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+const insertEvent = async (name, startDate, endDate) => {
+    console.log('name: ', name);
+    console.log('start: ', startDate);
+    console.log('end: ', endDate);
+    try {
+        await pool.query(`
+        BEGIN;
+        INSERT INTO ${Events} VALUES (default,'${name}', '${startDate}':: date,'${endDate}':: date);
+        END;`)
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+const insertService = async (type, startAt, closesAt) => {
+    insertIntoTable(CustomerServise, `(default, '${type}', '${startAt}':: time, '${closesAt}':: time)`);
+}
+
+
+function intializeCustomerService() {
+    const services = [
+        ['Management', '09:00', '17:00'],
+        ['HouseKeeping', '00:00', '12:00'],
+        ['Reception', '00:00', '12:00'],
+        ['RoomService', '00:00', '12:00'],
+    ]
+
+    for (service of services) {
+        insertService(service[0], service[1], service[2]);
+    }
+}
+
+// intializeCustomerService()
+
 module.exports = {
-    saveReservation
+    saveReservation,
+    insertEmployee,
+    insertEvent,
+    insertRoom
 }
