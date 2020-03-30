@@ -23,7 +23,6 @@ const authenticate=async(username, password)=> {
             }
             // extract hash from the query result
             const passwordHash = await queryResult.rows[0].passwordhash.toString();
-            console.log(passwordHash)
          
             //compare hash and plaintext and return the result
             if (!await bcrypt.compare(password, passwordHash)){
@@ -52,17 +51,17 @@ const authenticate=async(username, password)=> {
 
 
 const forgotPassword= async(username , password)=>{
- try{
+    console.log('im here')
+    console.log(username)
+    console.log(password)
      const hash= await bcrypt.hash(password,SALTROUNDS)
      const tryresp=await pool.query(`select * from verifyuser where username = '${username}'`)
-     console.log(tryresp)
+     if(tryresp.rows.length===0) throw new Error("No user")
      const response= await pool.query(`UPDATE verifyuser SET passwordhash = '${hash}'  WHERE username = '${username}' `)
-    // console.log(response)
-    } catch(e){
-     console.log(e)
-  }  
+    console.log(response)
+ 
 }
-// insertUsernamePassword('amir2211' , 'x221177')
+// insertUsernamePassword('amir2211' , 'sex221177')
 
 /* TESTING */
 
@@ -71,7 +70,7 @@ const forgotPassword= async(username , password)=>{
 
 // authenticate(user, pass)
 //     .then((res, err) => console.log(res))
-forgotPassword('amir2211' , 'negddsada 221177')
+// forgotPassword('amir2211' , 'negddsada 221177')
 
 module.exports = {
     authenticate,
