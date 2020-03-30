@@ -73,6 +73,10 @@ const getEmployees = async () => {
     return await getFromDB(`select * from employees`)
 }
 
+const getEmployeeWithID = async (id) => {
+    return await getFromDB(`select * from employees where employeeID = ${id}`)
+}
+
 /**
  * return the reservations' details
  */
@@ -88,9 +92,9 @@ const getEvents = async () => {
     return await getFromDB('select * from events')
 }
 
-const FindingOrderConfirmation=async(orderNumber)=>{
-    try{
-        const data= await pool.query(
+const FindingOrderConfirmation = async (orderNumber) => {
+    try {
+        const data = await pool.query(
             `select v.name , v.email ,v.phone , res.reservationid,
             res.startdate , res.enddate , res.price 
              from visitor v , reservation res , orderconfirmation o
@@ -99,11 +103,38 @@ const FindingOrderConfirmation=async(orderNumber)=>{
              and v.visitorid=o.visid
             `
         )
-         return data.rows
-    }catch(e){
+        return data.rows
+    } catch (e) {
         console.log(e)
     }
 
+}
+
+const getSearchFromDB = async (table, columns) => {
+    const columnNames = Object.keys(columns);
+    const columnValues = Object.values(columns);
+    let conditions = '';
+    for (let i = 0; i < columnNames.length; i++) {
+        if (columnValues[i] === '')
+            continue;
+        if (i === 0) {
+            if (columnNames[i] === 'position' || columnNames === 'bedtype') {
+                conditions = conditions.concat(columnNames[i] + ' = ' + `'${columnValues[i]}'`)
+            } else {
+                conditions = conditions.concat(columnNames[i] +  ' = ' +  columnValues[i]);
+            }
+        } else {
+            if (columnValues[i - 1] === '') {
+                conditions = conditions.concat(columnNames[i] + ' = ' + `'${columnValues[i]}'`)
+            } else {
+                conditions = conditions.concat(' AND ' + columnNames[i] + ' = ' + `'${columnValues[i]}'`)
+            }
+            
+        }
+    }
+    const query  = `select * from ${table} where ${conditions}`;
+    console.log(query);
+    return await getFromDB(query)
 }
 
 module.exports = {
@@ -112,5 +143,7 @@ module.exports = {
     getReservations,
     getRooms,
     getEvents,
-    FindingOrderConfirmation
+    FindingOrderConfirmation,
+    getEmployeeWithID,
+    getSearchFromDB
 }

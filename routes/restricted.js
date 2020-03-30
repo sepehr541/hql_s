@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const jwtKey = require('../auth/jwtKey');
-const { getEmployees, getReservations, getRooms, getEvents } = require('../db/selectQueries');
+const { getEmployees, getReservations, getRooms, getEvents, getSearchFromDB } = require('../db/selectQueries');
 const { insertEvent, insertEmployee, insertRoom } = require('../db/insertQueries');
 const { deleteEmployee, deleteResv, deleteEvent, deleteRoom } = require('../db/deleteQueries');
 const router = express.Router();
@@ -28,6 +28,17 @@ router.get('/', async (req, res) => {
     res.send('Token valid')
 })
 
+// general database search with query
+router.post('/search', async (req, res, next) => {
+    console.log(req.body);
+    try {
+        res.send(await getSearchFromDB(req.body.table, req.body.columns))
+    } catch (error) {
+        // console.log(error);
+        next(error)
+    }
+})
+
 // handle employees
 router.get('/employees', async (req, res) => {
     try {
@@ -38,6 +49,7 @@ router.get('/employees', async (req, res) => {
         res.end('error')
     }
 })
+
 router.post('/employees', async (req, res, next) => {
     console.log(req.body);
     try {
@@ -46,8 +58,7 @@ router.post('/employees', async (req, res, next) => {
     } catch (error) {
         next(error)
     }
-})
-
+});
 
 router.delete('/employees', async (req, res, next) => {
     console.log(req.body.id);
@@ -56,32 +67,44 @@ router.delete('/employees', async (req, res, next) => {
         res.end();
     } catch (error) {
         next(error);
-        console.log(error);
     }
-})
-// router.update()
-
-// handle resv
-router.get('/resv', async (req, res) => {
-    try {
-        const reservations = await getReservations();
-        console.log(reservations);
-        res.json(reservations);
-    } catch (error) {
-        console.log(error);
-    }
-
 });
-// router.post()
-router.delete('/resv', async (req, res, next) => {
+
+router.patch('/employees', async (req, res, next) => {
+    const id = req.body.id;
+    const data = {
+        position: req.body.empPosition,
+        salary: req.body.empSalary,
+        service: req.body.empSection
+    }
     try {
-        await deleteResv(req.body.id);
+        await updateEmployee(id, data);
         res.end();
     } catch (error) {
         next(error)
     }
-})
-// router.update()
+});
+
+// handle resv
+router.get('/resv', async (req, res, next) => {
+    try {
+        const reservations = await getReservations();
+        res.json(reservations);
+    } catch (error) {
+        next(error)
+    }
+
+});
+
+
+router.delete('/resv', async (req, res, next) => {
+    try {
+        await deleteResv(req.body.id, req.body.data);
+        res.end();
+    } catch (error) {
+        next(error)
+    }
+});
 
 
 // handle rooms
@@ -99,27 +122,20 @@ router.post('/rooms', async (req, res, next) => {
         await insertRoom(req.body.roomNum, req.body.roomCap, req.body.roomBed);
         res.end();
     } catch (error) {
-        console.log(error);
+
         next(error)
     }
-})
+});
 
 router.delete('/rooms', async (req, res, next) => {
     try {
         await deleteRoom(req.body.id);
         res.end();
     } catch (error) {
-        console.log(error);
         next(error)
     }
-})
-// router.update('/rooms', async (req, res, next) => {
-//     try {
-//         await updateRoom(req.body.id, req.body.price, req.body.bedtype)
-//     } catch (error) {
-//         next(error)
-//     }
-// })
+});
+
 
 // handle events
 router.get('/events', async (req, res) => {
@@ -129,8 +145,7 @@ router.get('/events', async (req, res) => {
     } catch (error) {
         next(error);
     }
-})
-
+});
 
 router.post('/events', async (req, res, next) => {
     console.log(req.body);
@@ -141,8 +156,7 @@ router.post('/events', async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-})
-
+});
 
 router.delete('/events', async (req, res, next) => {
     try {
@@ -152,7 +166,33 @@ router.delete('/events', async (req, res, next) => {
         console.log(error)
         next(error)
     }
-})
+});
+
+router.get('/visitors', async (req, res, next) => {
+    try {
+        res.send(await getVisitors());
+    } catch (error) {
+        next(error);
+    }
+});
+
+router.patch('/visitors', async (req, res, next) => {
+    const id = req.body.id;
+    const data = {
+        email: req.body.visitorEmail,
+        phone: req.body.phone
+    }
+    try {
+        await updateVisitor(req.body);
+        res.end();
+    } catch (error) {
+        next(error)
+    }
+});
+
+router.delete('/visitors', async (req, res, next) => {
+    
+});
 
 module.exports = {
     router,
