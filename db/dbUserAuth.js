@@ -13,7 +13,6 @@ const SALTROUNDS = 10;
  */
 const authenticate=async(username, password)=> {
         // get hashed password from DB
-        try{
             const queryResult = await pool.query(`
             SELECT passwordHash
             FROM verifyuser
@@ -30,11 +29,7 @@ const authenticate=async(username, password)=> {
             if (!await bcrypt.compare(password, passwordHash)){
                 throw new Error('PASS');
             }
-            console.log('ola')
-        }catch(e){
-            console.log(e)
-        }
-     
+       
        
 }
 
