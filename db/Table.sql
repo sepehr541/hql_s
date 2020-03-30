@@ -52,11 +52,11 @@ Create TABLE Reservation (
             pCount INTEGER NOT NULL
 );
 
-Create TABLE Visitor (
+Create TABLE Visitors (
         VisitorID INTEGER PRIMARY KEY,
         -- CardNumber INTEGER,
-        Name VARCHAR(25),
-        EMIAL VARCHAR(40),
+        visitorname VARCHAR(25),
+        email VARCHAR(40),
         phone INTEGER
 );
 
@@ -127,7 +127,7 @@ CREATE TABLE events (
     eventName VARCHAR(20) NOT NULL,
     startDate DATE NOT NULL,
     endDate DATE NOT NULL
-)
+);
 
 Create TABLE EmployeesHostEvents (
             EmployeeID INTEGER,
