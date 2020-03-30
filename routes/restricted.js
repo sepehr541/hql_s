@@ -1,6 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const jwtKey = require('../auth/jwtKey');
+const jwtKey = require('../public/auth/jwtkey');
 const { getEmployees, getReservations, getRooms, getEvents } = require('../db/selectQueries');
 const { insertEvent, insertEmployee, insertRoom } = require('../db/insertQueries');
 const { deleteEmployee, deleteResv, deleteEvent, deleteRoom } = require('../db/deleteQueries');
