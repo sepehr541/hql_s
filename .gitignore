@@ -9,3 +9,4 @@ runpost
 check
 psql
 .gitignore
+public/auth/jwtkey.js

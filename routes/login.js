@@ -1,8 +1,9 @@
 const express = require('express');
-const { authenticate } = require('../db/dbUserAuth');
+const { authenticate, forgotPassword } = require('../db/dbUserAuth');
 const jwt = require('jsonwebtoken');
-const jwtKey = require('../auth/jwtKey');
+const jwtKey = require('../public/auth/jwtkey');
 const router = express.Router();
+
 
 const jwtExpiry = 7200;
 
@@ -28,10 +29,19 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-// router.post('/forgotPassword' , async(req,res)=>{
-//     try{
-        
-//     }
-// })
+router.post('/forgotPassword' , async(req,res)=>{
+    const username=req.body.username
+    const password=req.body.password
+    try{
+        await forgotPassword(username , password)
+        res.send('Success')
+    }catch (e){
+        res.status(403)
+        if(e.message=='No user') res.send("no user found")
+        else{
+            res.send('We can not  help you right now ')
+        }
+    }
+})
 
 module.exports = router;
