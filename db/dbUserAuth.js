@@ -11,41 +11,55 @@ const SALTROUNDS = 10;
  * 
  * @returns {Promise} resolves to result of authentication
  */
-async function authenticate(username, password) {
-        // get hashed password from DB
-        const queryResult = await pool.query(`
-        SELECT passwordHash
-        FROM verifyuser
-        WHERE username = '${username}'
-        `)
-        if (queryResult.rows.length == 0){
-            throw new Error('USER');
-        }
-        // extract hash from the query result
-        const passwordHash = await queryResult.rows[0].passwordhash.toString();
+const authenticate = async (username, password) => {
+    console.log(username);
+    // get hashed password from DB
+    const queryResult = await pool.query(`
+            SELECT passwordHash
+            FROM verifyuser
+            WHERE username = '${username}'
+            `)
+    if (queryResult.rows.length == 0) {
+        throw new Error('USER');
+    }
+    // extract hash from the query result
+    const passwordHash = await queryResult.rows[0].passwordhash.toString();
+    console.log(passwordHash)
 
-        //compare hash and plaintext and return the result
-        if (!await bcrypt.compare(password, passwordHash)){
-            throw new Error('PASS');
-        }
+    //compare hash and plaintext and return the result
+    if (!await bcrypt.compare(password, passwordHash)) {
+        throw new Error('PASS');
+    }
 }
-
 
 /**
  * insert a username and password into verifyuser
  * @param {String} username 
  * @param {String} password will be hashed
  */
-async function insertUsernamePassword(username, password) {
+const insertUsernamePassword = async (username, password) => {
     try {
-    const hash = await bcrypt.hash(password, SALTROUNDS);
-    console.log(hash);
-    pool.query(`INSERT INTO verifyuser VALUES ('${username}', '${hash}')`, defaultCallback)
-    } catch(error) {
+        const hash = await bcrypt.hash(password, SALTROUNDS);
+        console.log(hash);
+        pool.query(`INSERT INTO verifyuser VALUES ('${username}', '${hash}')`, defaultCallback)
+    } catch (error) {
         console.log(error);
     }
 }
 
+
+const forgotPassword = async (username, password) => {
+    try {
+        const hash = await bcrypt.hash(password, SALTROUNDS)
+        const tryresp = await pool.query(`select * from verifyuser where username = '${username}'`)
+        console.log(tryresp)
+        const response = await pool.query(`UPDATE verifyuser SET passwordhash = '${hash}'  WHERE username = '${username}' `)
+        // console.log(response)
+    } catch (e) {
+        console.log(e)
+    }
+}
+// insertUsernamePassword('amir2211' , 'x221177')
 
 /* TESTING */
 
@@ -54,8 +68,10 @@ async function insertUsernamePassword(username, password) {
 
 // authenticate(user, pass)
 //     .then((res, err) => console.log(res))
+// forgotPassword('amir2211', 'negddsada 221177')
 
 module.exports = {
     authenticate,
     insertUsernamePassword,
+    forgotPassword
 }

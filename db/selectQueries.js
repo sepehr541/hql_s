@@ -121,7 +121,7 @@ const getSearchFromDB = async (table, columns) => {
             if (columnNames[i] === 'position' || columnNames === 'bedtype') {
                 conditions = conditions.concat(columnNames[i] + ' = ' + `'${columnValues[i]}'`)
             } else {
-                conditions = conditions.concat(columnNames[i] +  ' = ' +  columnValues[i]);
+                conditions = conditions.concat(columnNames[i] + ' = ' + columnValues[i]);
             }
         } else {
             if (columnValues[i - 1] === '') {
@@ -129,11 +129,49 @@ const getSearchFromDB = async (table, columns) => {
             } else {
                 conditions = conditions.concat(' AND ' + columnNames[i] + ' = ' + `'${columnValues[i]}'`)
             }
-            
+
         }
     }
-    const query  = `select * from ${table} where ${conditions}`;
+    const query = `select * from ${table} where ${conditions}`;
     return await getFromDB(query)
+}
+
+
+const getStats = async () => {
+
+    //aggregate queries
+    const empResp = await pool.query(`
+    select count(*) as totalEmp, avg(salary) as avgsalary, max(salary) as maxSalary
+    from employees 
+    `);
+
+    const resvResp = await pool.query(`
+    select count(*) as totalResv, sum(pcount) as GuestCount
+    from reservation 
+    `);
+
+    // nested aggregate with group by
+    const roomResp = await pool.query(`
+    SELECT
+        r.capacity,
+        count(*):: INT capcount
+    FROM
+        room r,
+        reservationroom rr
+    WHERE
+        r.id = rr.roomnumber
+    GROUP BY
+        r.capacity
+    Order by count(*) desc
+    `);
+
+    let stats = {
+        empStats: empResp.rows[0],
+        resvStats: resvResp.rows[0],
+        roomStats: roomResp.rows
+    }
+
+    return stats;
 }
 
 module.exports = {
@@ -144,5 +182,6 @@ module.exports = {
     getEvents,
     FindingOrderConfirmation,
     getEmployeeWithID,
-    getSearchFromDB
+    getSearchFromDB,
+    getStats
 }

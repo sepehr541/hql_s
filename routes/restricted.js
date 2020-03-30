@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const jwtKey = require('../public/auth/jwtkey');
-const { getEmployees, getReservations, getRooms, getEvents } = require('../db/selectQueries');
+const jwtKey = require('../auth/jwtKey');
+const { getEmployees, getReservations, getRooms, getEvents, getSearchFromDB, getStats } = require('../db/selectQueries');
 const { insertEvent, insertEmployee, insertRoom } = require('../db/insertQueries');
 const { deleteEmployee, deleteResv, deleteEvent, deleteRoom } = require('../db/deleteQueries');
 const router = express.Router();
@@ -26,6 +26,15 @@ const verifyToken = async (req, res, next) => {
 // verify the token on every request
 router.get('/', async (req, res) => {
     res.send('Token valid')
+})
+
+router.get('/stats', async (req, res, next) => {
+    try {
+        res.send(await getStats());
+    } catch (error) {
+        console.log(error);
+        next(error)
+    }
 })
 
 // general database search with query

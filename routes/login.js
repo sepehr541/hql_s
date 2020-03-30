@@ -1,7 +1,7 @@
 const express = require('express');
 const { authenticate } = require('../db/dbUserAuth');
 const jwt = require('jsonwebtoken');
-const jwtKey = require('../public/auth/jwtkey');
+const jwtKey = require('../auth/jwtKey');
 const router = express.Router();
 
 const jwtExpiry = 7200;
@@ -28,10 +28,10 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-router.post('/forgotPassword' , async(req,res)=>{
-    try{
+// router.post('/forgotPassword' , async(req,res)=>{
+//     try{
         
-    }
-})
+//     }
+// })
 
 module.exports = router;
