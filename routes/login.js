@@ -1,7 +1,7 @@
 const express = require('express');
 const { authenticate } = require('../db/dbUserAuth');
 const jwt = require('jsonwebtoken');
-const jwtKey = require('../auth/jwtKey');
+const jwtKey = require('../public/auth/jwtkey');
 const router = express.Router();
 
 const jwtExpiry = 7200;
@@ -9,13 +9,14 @@ const jwtExpiry = 7200;
 router.post('/', async (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
+    console.log(password)
     try {
         await authenticate(username, password);
         const token = jwt.sign({username}, jwtKey, {
             algorithm: 'HS256',
             expiresIn: jwtExpiry
         })
-        res.json(token);
+        res.json(token); 
     } catch (error) {
         console.log(error);
         res.status(401);
@@ -26,5 +27,11 @@ router.post('/', async (req, res, next) => {
         }
     }
 });
+
+router.post('/forgotPassword' , async(req,res)=>{
+    try{
+        
+    }
+})
 
 module.exports = router;
