@@ -133,7 +133,6 @@ const getSearchFromDB = async (table, columns) => {
         }
     }
     const query  = `select * from ${table} where ${conditions}`;
-    console.log(query);
     return await getFromDB(query)
 }
 
