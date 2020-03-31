@@ -174,12 +174,67 @@ const getStats = async () => {
     let employeestat=Object.values(stats.empStats);
     let resvstat=Object.values(stats.resvStats);
     let roomstat=Object.values(stats.roomStats);
-    
+
     if(employeestat.includes(null)||resvstat.includes(null)|| roomstat.includes(null)){
         throw new Error('No data found');
     }
     return stats;
 }
+
+//Division for all the rooms that have all the essentials and rooms that don't
+const getRoomWithEssentials=async()=>{
+    const notNeeded=await pool.query(`
+                    SELECT  r.id 
+                    FROM room r 
+                    WHERE NOT EXISTS ((
+                                SELECT
+                                    itemid
+                                FROM
+                                    roomessentials)
+                            EXCEPT (
+                                SELECT
+                                    rrhe.itemid
+                                FROM
+                                    room rr,
+                                    roomhasessentials rrhe
+                                WHERE
+                                    rr.id = rrhe.roomnumber
+                                    AND rr.id = r.id))`)
+
+     const needed=await pool.query(`
+        select r.id
+        from room r 
+        except( SELECT  r.id 
+            FROM room r 
+            WHERE NOT EXISTS ((
+                        SELECT
+                            itemid
+                        FROM
+                            roomessentials)
+                    EXCEPT (
+                        SELECT
+                            rrhe.itemid
+                        FROM
+                            room rr,
+                            roomhasessentials rrhe
+                        WHERE
+                            rr.id = rrhe.roomnumber
+                            AND rr.id = r.id)))
+                            
+        `)
+        let neededEssential=[]
+        let notNeededEssential=[]
+        for(let room of needed.rows){
+            neededEssential.push(room.id)
+        }
+        for(let room of notNeeded.rows){
+            notNeededEssential.push(room.id)
+        }
+        let obj={req:neededEssential, notreq:notNeededEssential}
+    return obj
+
+}
+getRoomWithEssentials()
 
 // getStats()
 
@@ -192,5 +247,6 @@ module.exports = {
     FindingOrderConfirmation,
     getEmployeeWithID,
     getSearchFromDB,
-    getStats
+    getStats,
+    getRoomWithEssentials
 }
