@@ -21,7 +21,7 @@ Create TABLE Restaurant (
 );
 
 Create TABLE CustomerService (
-            ServiceID SERIAL PRIMARY KEY,
+            ServiceID INTEGER PRIMARY KEY,
             ServiceType VARCHAR(20) UNIQUE NOT NULL ,
             startAt TIME NOT NULL,
             closesAt TIME NOT NULL
@@ -155,7 +155,9 @@ Create TABLE EmployeeWorksIn (
             EmployeeID INTEGER,
             ServiceID INTEGER,
             Primary Key (EmployeeID, ServiceID),
-            FOREIGN Key (EmployeeID) references Employees,
+            FOREIGN Key (EmployeeID) references Employees
+            ON Delete Cascade
+            ON Update Cascade,
             FOREIGN Key (ServiceID) references CustomerService
             ON Delete Cascade
             ON Update Cascade
