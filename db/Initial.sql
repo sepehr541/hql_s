@@ -64,7 +64,7 @@ INSERT INTO roomessentials VALUES (2, 'Shampoo', 10);
 INSERT INTO roomessentials VALUES (3, 'Towels', 12);
 INSERT INTO roomessentials VALUES (4, 'MiniBar', 30);
 
--- INSERT INTO roomhasessentials VALUES (101, 1)
+-- INSERT INTO roomhasessentials VALUES (101, 1);
 INSERT INTO roomhasessentials VALUES (101, 2);
 INSERT INTO roomhasessentials VALUES (101, 3);
 INSERT INTO roomhasessentials VALUES (101, 4);
@@ -89,7 +89,7 @@ INSERT INTO roomhasessentials VALUES (201, 1);
 INSERT INTO roomhasessentials VALUES (201, 2);
 INSERT INTO roomhasessentials VALUES (201, 3);
 INSERT INTO roomhasessentials VALUES (201, 4);
--- INSERT INTO roomhasessentials VALUES (202, 1)
+-- INSERT INTO roomhasessentials VALUES (202, 1);
 INSERT INTO roomhasessentials VALUES (202, 2);
 INSERT INTO roomhasessentials VALUES (202, 3);
 INSERT INTO roomhasessentials VALUES (202, 4);
@@ -115,14 +115,14 @@ INSERT INTO roomhasessentials VALUES (302, 1);
 INSERT INTO roomhasessentials VALUES (302, 2);
 INSERT INTO roomhasessentials VALUES (302, 3);
 INSERT INTO roomhasessentials VALUES (302, 4);
--- INSERT INTO roomhasessentials VALUES (303, 1)
+-- INSERT INTO roomhasessentials VALUES (303, 1);
 INSERT INTO roomhasessentials VALUES (303, 2);
 INSERT INTO roomhasessentials VALUES (303, 3);
 INSERT INTO roomhasessentials VALUES (303, 4);
 INSERT INTO roomhasessentials VALUES (304, 1);
 INSERT INTO roomhasessentials VALUES (304, 2);
 INSERT INTO roomhasessentials VALUES (304, 3);
-INSERT INTO roomhasessentials VALUES (304, 4)
+INSERT INTO roomhasessentials VALUES (304, 4);
 INSERT INTO roomhasessentials VALUES (305, 1);
 INSERT INTO roomhasessentials VALUES (305, 2);
 INSERT INTO roomhasessentials VALUES (305, 3);
@@ -142,7 +142,7 @@ INSERT INTO roomhasessentials VALUES (403, 2);
 INSERT INTO roomhasessentials VALUES (403, 3);
 INSERT INTO roomhasessentials VALUES (403, 4);
 INSERT INTO roomhasessentials VALUES (404, 1);
--- INSERT INTO roomhasessentials VALUES (404, 2)
+-- INSERT INTO roomhasessentials VALUES (404, 2);
 INSERT INTO roomhasessentials VALUES (404, 3);
 INSERT INTO roomhasessentials VALUES (404, 4);
 INSERT INTO roomhasessentials VALUES (405, 1);
@@ -169,7 +169,7 @@ INSERT INTO roomhasessentials VALUES (504, 3);
 INSERT INTO roomhasessentials VALUES (504, 4);
 INSERT INTO roomhasessentials VALUES (505, 1);
 INSERT INTO roomhasessentials VALUES (505, 2);
---INSERT INTO roomhasessentials VALUES (505, 3)
+--INSERT INTO roomhasessentials VALUES (505, 3);
 INSERT INTO roomhasessentials VALUES (505, 4);
 
 

@@ -132,6 +132,8 @@ Create TABLE Employees (
             Salary INTEGER,
             username VARCHAR(100) DEFAULT NULL,
             FOREIGN KEY(username) REFERENCES verifyuser
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
 );
 
 CREATE TABLE events (
