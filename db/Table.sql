@@ -49,7 +49,7 @@ CREATE TABLE RoomHasEssentials (
     FOREIGN KEY (itemid) REFERENCES roomessentials
     ON Delete Cascade
     ON Update Cascade
-)
+);
 
 Create Table RoomPrice (
     roomType VARCHAR(20) NOT NULL,
