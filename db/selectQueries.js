@@ -141,7 +141,7 @@ const getStats = async () => {
 
     //aggregate queries
     const empResp = await pool.query(`
-    select count(*) as totalEmp, avg(salary) as avgsalary, max(salary) as maxSalary
+    select count(*) as totalEmp, avg(salary)  as avgsalary, max(salary) as maxSalary
     from employees 
     `);
 
@@ -170,9 +170,18 @@ const getStats = async () => {
         resvStats: resvResp.rows[0],
         roomStats: roomResp.rows
     }
-
+    console.log(stats)
+    let employeestat=Object.values(stats.empStats);
+    let resvstat=Object.values(stats.resvStats);
+    let roomstat=Object.values(stats.roomStats);
+    
+    if(employeestat.includes(null)||resvstat.includes(null)|| roomstat.includes(null)){
+        throw new Error('No data found');
+    }
     return stats;
 }
+
+// getStats()
 
 module.exports = {
     FindingAvailableRooms,

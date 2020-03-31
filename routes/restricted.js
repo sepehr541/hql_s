@@ -1,6 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const jwtKey = require('../auth/jwtKey');
+const jwtKey = require('../auth/jwtkey');
 const { getEmployees, getReservations, getRooms, getEvents, getSearchFromDB, getStats } = require('../db/selectQueries');
 const { insertEvent, insertEmployee, insertRoom } = require('../db/insertQueries');
 const { deleteEmployee, deleteResv, deleteEvent, deleteRoom } = require('../db/deleteQueries');
@@ -16,6 +16,7 @@ const verifyToken = async (req, res, next) => {
     try {
         const authorization = req.headers['authorization'];
         const userToken = authorization.split(' ')[1];
+        console.log(userToken)
         jwt.verify(userToken, jwtKey);
         next();
     } catch (error) {
@@ -32,8 +33,12 @@ router.get('/stats', async (req, res, next) => {
     try {
         res.send(await getStats());
     } catch (error) {
+        console.log('im here')
         console.log(error);
-        next(error)
+        if(error.message=='No data found'){
+            res.status(404).send('No data found')
+        }
+        // next(error)
     }
 })
 
