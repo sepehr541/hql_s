@@ -39,6 +39,18 @@ Create TABLE Room (
         BedType CHAR VARYING (20) NOT NULL
 );
 
+CREATE TABLE RoomHasEssentials (
+    roomnumber Integer,
+    itemid integer,
+    PRIMARY KEY (roomnumber, itemid),
+    Foreign KEY (roomnumber) REFERENCES room 
+    ON Delete Cascade
+    ON Update Cascade,
+    FOREIGN KEY (itemid) REFERENCES roomessentials
+    ON Delete Cascade
+    ON Update Cascade
+)
+
 Create Table RoomPrice (
     roomType VARCHAR(20) NOT NULL,
     Price REAL NOT NULL
