@@ -122,7 +122,7 @@ INSERT INTO roomhasessentials VALUES (303, 4);
 INSERT INTO roomhasessentials VALUES (304, 1);
 INSERT INTO roomhasessentials VALUES (304, 2);
 INSERT INTO roomhasessentials VALUES (304, 3);
-INSERT INTO roomhasessentials VALUES (304, 4)
+INSERT INTO roomhasessentials VALUES (304, 4);
 INSERT INTO roomhasessentials VALUES (305, 1);
 INSERT INTO roomhasessentials VALUES (305, 2);
 INSERT INTO roomhasessentials VALUES (305, 3);

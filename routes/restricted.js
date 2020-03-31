@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const jwtKey = require('../auth/jwtkey');
-const { getEmployees, getReservations, getRooms, getEvents, getSearchFromDB, getStats } = require('../db/selectQueries');
+const { getEmployees, getReservations, getRooms, getEvents, getSearchFromDB, getStats ,getRoomWithEssentials } = require('../db/selectQueries');
 const { insertEvent, insertEmployee, insertRoom } = require('../db/insertQueries');
 const { deleteEmployee, deleteResv, deleteEvent, deleteRoom } = require('../db/deleteQueries');
 const router = express.Router();
@@ -28,6 +28,20 @@ const verifyToken = async (req, res, next) => {
 router.get('/', async (req, res) => {
     res.send('Token valid')
 })
+
+router.get('/essentials', async(req,res)=>{
+    try{
+        const allrooms=await getRoomWithEssentials()
+        res.send(allrooms)
+    }catch(e){
+        res.status(404)
+        console.log(e)
+        res.send('No data available right now')
+    }
+
+})
+
+
 
 router.get('/stats', async (req, res, next) => {
     try {
