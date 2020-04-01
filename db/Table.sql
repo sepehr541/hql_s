@@ -2,6 +2,23 @@ CREATE TABLE Parking (
     Pnum INTEGER PRIMARY KEY
 );
 
+CREATE TABLE verifyuser (
+    username VARCHAR(100),
+    passwordHash bytea UNIQUE NOT NULL,
+    PRIMARY KEY (username)
+);
+
+Create TABLE Employees (
+            employeeID INTEGER PRIMARY KEY,
+            Name CHAR(20),
+            Position VARCHAR(20),
+            Salary INTEGER,
+            username VARCHAR(100) DEFAULT NULL,
+            FOREIGN KEY(username) REFERENCES verifyuser
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
+);
+
 Create TABLE Recreational (
             ID INTEGER PRIMARY KEY,
             Type CHAR(20)
@@ -76,7 +93,7 @@ CREATE TABLE VisitorReservation (
             VisitorID INTEGER,
             ReservationID INTEGER,
             Primary Key(VisitorID, ReservationID),
-            FOREIGN Key (VisitorID) references Visitor,
+            FOREIGN Key (VisitorID) references Visitors,
             Foreign Key (ReservationID) references Reservation
             ON Delete Cascade
             ON Update Cascade
@@ -87,7 +104,7 @@ Create TABLE VisitorUsesServices (
             ServiceID INTEGER,
             usage_Date DATE,
             PRIMARY KEY (VisitorID , ServiceID),
-            FOREIGN KEY (VisitorID) references Visitor,
+            FOREIGN KEY (VisitorID) references Visitors,
             FOREIGN KEY (ServiceID) references CustomerService 
             ON Delete Cascade 
             ON Update Cascade
@@ -107,8 +124,8 @@ Create TABLE EmployeesHostEvents (
             EmployeeID INTEGER,
             EventID INTEGER,
             Primary Key (EmployeeID),
-            Foreign Key (EmployeeID) references Employee,
-            Foreign Key (EventID) references Event
+            Foreign Key (EmployeeID) references Employees,
+            Foreign Key (EventID) references Events
             ON Delete Cascade
             ON Update Cascade 
 );
@@ -125,16 +142,7 @@ Create TABLE ReservationRoom (
             ON Update Cascade
 );
 
-Create TABLE Employees (
-            employeeID INTEGER PRIMARY KEY,
-            Name CHAR(20),
-            Position VARCHAR(20),
-            Salary INTEGER,
-            username VARCHAR(100) DEFAULT NULL,
-            FOREIGN KEY(username) REFERENCES verifyuser
-            ON DELETE CASCADE
-            ON UPDATE CASCADE
-);
+
 
 CREATE TABLE events (
     eventID SERIAL PRIMARY KEY,
@@ -143,15 +151,15 @@ CREATE TABLE events (
     endDate DATE NOT NULL
 );
 
-Create TABLE EmployeesHostEvents (
-            EmployeeID INTEGER,
-        --     EventID INTEGER,
-            Primary Key (EmployeeID),
-            Foreign Key (EmployeeID) references Employees
-        --     Foreign Key (EventID) references Event
-        --     ON Delete Cascade
-        --     ON Update Cascade
-);
+-- Create TABLE EmployeesHostEvents (
+--             EmployeeID INTEGER,
+--         --     EventID INTEGER,
+--             Primary Key (EmployeeID),
+--             Foreign Key (EmployeeID) references Employees
+--         --     Foreign Key (EventID) references Event
+--         --     ON Delete Cascade
+--         --     ON Update Cascade
+-- );
 
 Create TABLE EmployeeWorksIn (
             EmployeeID INTEGER,
@@ -166,11 +174,7 @@ Create TABLE EmployeeWorksIn (
 );
 
 
-CREATE TABLE verifyuser (
-    username VARCHAR(100),
-    passwordHash bytea UNIQUE NOT NULL,
-    PRIMARY KEY (username)
-);
+
 
 CREATE TABLE OrderConfirmation(
     ordeconfid INTEGER,
@@ -178,7 +182,7 @@ CREATE TABLE OrderConfirmation(
     visid INTEGER,
     PRIMARY KEY (ordeconfid,resvid, visid),
     FOREIGN key (resvid) REFERENCES Reservation,
-    FOREIGN KEY (visid) REFERENCES Visitor
+    FOREIGN KEY (visid) REFERENCES Visitors
     ON Delete Cascade
     ON Update Cascade 
 );

@@ -12,3 +12,5 @@ psql
 public/auth/jwtkey.js
 
 /build/
+
+.env

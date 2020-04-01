@@ -1,3 +1,6 @@
+const dotenv = require('dotenv');
+dotenv.config();
+
 var createError = require('http-errors');
 var jade = require('jade');
 var express = require('express');
