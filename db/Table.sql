@@ -13,10 +13,6 @@ Create TABLE Employees (
             Name CHAR(20),
             Position VARCHAR(20),
             Salary INTEGER,
-            username VARCHAR(100) DEFAULT NULL,
-            FOREIGN KEY(username) REFERENCES verifyuser
-            ON DELETE CASCADE
-            ON UPDATE CASCADE
 );
 
 Create TABLE Recreational (

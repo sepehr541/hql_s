@@ -1,7 +1,7 @@
 const express = require('express');
 const { authenticate, forgotPassword } = require('../db/dbUserAuth');
 const jwt = require('jsonwebtoken');
-const jwtKey = require('../auth/jwtkey');
+const jwtKey = process.env.JWT_KEY;
 const router = express.Router();
 
 

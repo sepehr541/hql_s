@@ -26,7 +26,7 @@ INSERT INTO room VALUES (505, 5, 'King');
 
 INSERT INTO Employees values(11250, 'Asghar Tavasoli', 'Financial Analyst', 100000);
 INSERT INTO Employees values (19480,'Molok Hooshangi',  'HouseKeeper', 45000);
-INSERT INTO Employees values (10261, 'Amir Sayyar', 'IT', 250000, 'amir2211');
+INSERT INTO Employees values (10261, 'Amir Sayyar', 'IT', 250000);
 INSERT INTO Employees values (16443 , 'Sepehr Noorafshan', 'Manger', 250000);
 INSERT INTO Employees values (18421 , 'Jake xi', 'Chief', 100000);
 INSERT INTO Employees values (11233, 'John Norton', 'Front Desk', 60000);
