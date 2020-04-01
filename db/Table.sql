@@ -2,6 +2,9 @@ CREATE TABLE Parking (
     Pnum INTEGER PRIMARY KEY
 );
 
+
+
+
 Create TABLE Recreational (
             ID INTEGER PRIMARY KEY,
             Type CHAR(20)
@@ -64,22 +67,23 @@ Create TABLE Reservation (
             pCount INTEGER NOT NULL
 );
 
-Create TABLE Visitors (
-        VisitorID INTEGER PRIMARY KEY,
-        -- CardNumber INTEGER,
-        visitorname VARCHAR(25),
-        email VARCHAR(40),
-        phone INTEGER
-);
 
 CREATE TABLE VisitorReservation (
             VisitorID INTEGER,
             ReservationID INTEGER,
             Primary Key(VisitorID, ReservationID),
-            FOREIGN Key (VisitorID) references Visitor,
-            Foreign Key (ReservationID) references Reservation
+            FOREIGN Key (VisitorID) references Visitors,
+            FOREIGN Key (ReservationID) references Reservation
             ON Delete Cascade
             ON Update Cascade
+);
+
+Create TABLE Visitors (
+        VisitorID INTEGER PRIMARY KEY,
+        -- CardNumber INTEGER,
+        visitorname VARCHAR(25),
+        email VARCHAR(40),
+        phone VARCHAR(40)
 );
 
 Create TABLE VisitorUsesServices (
@@ -87,7 +91,7 @@ Create TABLE VisitorUsesServices (
             ServiceID INTEGER,
             usage_Date DATE,
             PRIMARY KEY (VisitorID , ServiceID),
-            FOREIGN KEY (VisitorID) references Visitor,
+            FOREIGN KEY (VisitorID) references Visitors,
             FOREIGN KEY (ServiceID) references CustomerService 
             ON Delete Cascade 
             ON Update Cascade
@@ -129,7 +133,7 @@ Create TABLE Employees (
             employeeID INTEGER PRIMARY KEY,
             Name CHAR(20),
             Position VARCHAR(20),
-            Salary INTEGER,
+            Salary INTEGER
 );
 
 CREATE TABLE events (
@@ -174,7 +178,7 @@ CREATE TABLE OrderConfirmation(
     visid INTEGER,
     PRIMARY KEY (ordeconfid,resvid, visid),
     FOREIGN key (resvid) REFERENCES Reservation,
-    FOREIGN KEY (visid) REFERENCES Visitor
+    FOREIGN KEY (visid) REFERENCES Visitors
     ON Delete Cascade
     ON Update Cascade 
 );

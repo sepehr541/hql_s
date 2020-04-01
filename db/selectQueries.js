@@ -95,9 +95,9 @@ const getEvents = async () => {
 const FindingOrderConfirmation = async (orderNumber) => {
     try {
         const data = await pool.query(
-            `select v.name , v.email ,v.phone , res.reservationid,
+            `select v.visitorname , v.email ,v.phone , res.reservationid,
             res.startdate , res.enddate , res.price 
-             from visitor v , reservation res , orderconfirmation o
+             from visitors v , reservation res , orderconfirmation o
             where o.ordeconfid=${orderNumber} and 
             res.reservationid= o.resvid
              and v.visitorid=o.visid
