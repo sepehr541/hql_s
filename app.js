@@ -13,7 +13,9 @@ var loginRouter = require('./routes/login');
 var {router: restrictedRouter, verifyToken} = require('./routes/restricted');
 var orderconf=require('./routes/orderConf')
 var cors = require("cors")
+var dotnv=require('dotenv')
 var app = express();
+dotnv.config()
 app.set('view engine', 'jade')
 app.use(express.static(path.join(__dirname, 'build')));
 app.get('/', function(req, res) {
