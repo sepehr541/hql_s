@@ -75,17 +75,27 @@ const insertRoomResv = (resvID, roomID) => {
 
 
 var saveReservation = async (name, start, end, phone, email, roomid, price, people) => {
-    let reservationId = Math.ceil(Math.random()*10000)
-    let visitorID =Math.floor(Math.random(1)*2000)
-    console.log(reservationId)
-    let orderconfirmation=Math.floor(Math.random()*40000)
+    // let reservationId = Math.ceil(Math.random()*10000)
+    // let visitorID =Math.floor(Math.random()*2000)
+    // console.log(reservationId)
+    // console.log(visitorID)
+    // console.log(phone)
+    // let orderconfirmation=Math.floor(Math.random()*40000)
+    let reservationId=2
+    let visitorID=5
+    let orderconfirmation=10
+    console.log(email)
+    console.log(start)
+    console.log(end)
+    console.log(phone)
+
 
     try {
         const data = await pool.query(`
        begin;
          insert into reservation values (${reservationId},'${start}'::date , '${end}'::date , ${price} , ${people});
          insert into reservationroom values (${reservationId}, ${roomid});
-         insert into visitors values (${visitorID}, '${name}', '${email}', ${phone});
+         insert into visitors values (${visitorID}, '${name}','${email}', '${phone}');
          insert into visitorreservation values (${visitorID}, ${reservationId});
          insert into orderconfirmation values(${orderconfirmation},${reservationId},${visitorID});
          commit;`)

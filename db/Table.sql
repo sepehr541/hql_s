@@ -77,13 +77,6 @@ Create TABLE Reservation (
             pCount INTEGER NOT NULL
 );
 
-Create TABLE Visitors (
-        VisitorID INTEGER PRIMARY KEY,
-        -- CardNumber INTEGER,
-        visitorname VARCHAR(25),
-        email VARCHAR(40),
-        phone INTEGER
-);
 
 CREATE TABLE VisitorReservation (
             VisitorID INTEGER,
@@ -95,6 +88,14 @@ CREATE TABLE VisitorReservation (
             Foreign Key (ReservationID) references Reservation
             ON Delete Cascade
             ON Update Cascade
+);
+
+Create TABLE Visitors (
+        VisitorID INTEGER PRIMARY KEY,
+        -- CardNumber INTEGER,
+        visitorname VARCHAR(25),
+        email VARCHAR(40),
+        phone VARCHAR(40)
 );
 
 Create TABLE VisitorUsesServices (
