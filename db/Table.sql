@@ -139,7 +139,6 @@ Create TABLE ReservationRoom (
 );
 
 
-
 CREATE TABLE events (
     eventID SERIAL PRIMARY KEY,
     eventName VARCHAR(20) NOT NULL,
