@@ -24,12 +24,12 @@ INSERT INTO room VALUES (503, 4, 'King');
 INSERT INTO room VALUES (504, 5, 'King');
 INSERT INTO room VALUES (505, 5, 'King');
 
-INSERT INTO Employees values(11250, 'Asghar Tavasoli', 'Financial Analyst', 100000, 'asghar69');
-INSERT INTO Employees values (19480,'Molok Hooshangi',  'HouseKeeper', 45000, 'Moloki85');
-INSERT INTO Employees values (10261, 'Amir Sayyar', 'IT', 250000, 'amir2211' );
-INSERT INTO Employees values (16443 , 'Sepehr Noorafshan', 'Manger', 250000, 'sepeher541' );
-INSERT INTO Employees values (18421 , 'Jake xi', 'Chief', 100000, 'xixi' );
-INSERT INTO Employees values (11233, 'John Norton', 'Front Desk', 60000, 'johnny22' );
+INSERT INTO Employees values(11250, 'Asghar Tavasoli', 'Financial Analyst', 100000);
+INSERT INTO Employees values (19480,'Molok Hooshangi',  'HouseKeeper', 45000);
+INSERT INTO Employees values (10261, 'Amir Sayyar', 'IT', 250000, 'amir2211');
+INSERT INTO Employees values (16443 , 'Sepehr Noorafshan', 'Manger', 250000);
+INSERT INTO Employees values (18421 , 'Jake xi', 'Chief', 100000);
+INSERT INTO Employees values (11233, 'John Norton', 'Front Desk', 60000);
 
 INSERT INTO customerservice VALUES (1, 'Management', '09:00', '17:00');
 INSERT INTO customerservice VALUES (2, 'HouseKeeping', '00:00', '12:00');
