@@ -52,7 +52,7 @@ router.get('/stats', async (req, res, next) => {
         if(error.message=='No data found'){
             res.status(404).send('No data found')
         }
-        // next(error)
+        next(error)
     }
 })
 
