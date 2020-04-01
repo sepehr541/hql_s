@@ -85,7 +85,7 @@ var saveReservation = async (name, start, end, phone, email, roomid, price, peop
        begin;
          insert into reservation values (${reservationId},'${start}'::date , '${end}'::date , ${price} , ${people});
          insert into reservationroom values (${reservationId}, ${roomid});
-         insert into visitors values (${visitorID}, '${name}', ${phone}, '${email}');
+         insert into visitors values (${visitorID}, '${name}', '${email}', ${phone});
          insert into visitorreservation values (${reservationId}, ${visitorID});
          insert into orderconfirmation values(${orderconfirmation},${reservationId},${visitorID});
          commit;`)

@@ -12,7 +12,7 @@ Create TABLE Employees (
             employeeID INTEGER PRIMARY KEY,
             Name CHAR(20),
             Position VARCHAR(20),
-            Salary INTEGER,
+            Salary INTEGER
 );
 
 Create TABLE Recreational (
