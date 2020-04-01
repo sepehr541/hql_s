@@ -61,16 +61,6 @@ const forgotPassword = async (username, password) => {
         console.log(e)
     }
 }
-// insertUsernamePassword('amir2211' , 'x221177')
-
-/* TESTING */
-
-// const user = 'test';
-// const pass = 'test';
-
-// authenticate(user, pass)
-//     .then((res, err) => console.log(res))
-// forgotPassword('amir2211', 'negddsada 221177')
 
 module.exports = {
     authenticate,
