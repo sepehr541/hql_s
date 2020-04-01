@@ -75,15 +75,15 @@ const insertRoomResv = (resvID, roomID) => {
 
 
 var saveReservation = async (name, start, end, phone, email, roomid, price, people) => {
-    // let reservationId = Math.ceil(Math.random()*10000)
-    // let visitorID =Math.floor(Math.random()*2000)
-    // console.log(reservationId)
-    // console.log(visitorID)
-    // console.log(phone)
-    // let orderconfirmation=Math.floor(Math.random()*40000)
-    let reservationId=2
-    let visitorID=5
-    let orderconfirmation=10
+    let reservationId = Math.ceil(Math.random()*10000)
+    let visitorID =Math.floor(Math.random()*2000)
+    console.log(reservationId)
+    console.log(visitorID)
+    console.log(phone)
+    let orderconfirmation=Math.floor(Math.random()*40000)
+    // let reservationId=2
+    // let visitorID=5
+    // let orderconfirmation=10
     console.log(email)
     console.log(start)
     console.log(end)
@@ -99,8 +99,9 @@ var saveReservation = async (name, start, end, phone, email, roomid, price, peop
          insert into visitorreservation values (${visitorID}, ${reservationId});
          insert into orderconfirmation values(${orderconfirmation},${reservationId},${visitorID});
          commit;`)
+
         console.log(data)
-        return true
+        return orderconfirmation
     } catch (e) {
         console.log(e);
     }
