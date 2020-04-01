@@ -46,7 +46,7 @@ const insertUsernamePassword = async (username, password) => {
         console.log(error);
     }
 }
-insertUsernamePassword('amir2211','sex221177')
+// insertUsernamePassword('amir2211','sex221177')
 
 
 const forgotPassword = async (username, password) => {
