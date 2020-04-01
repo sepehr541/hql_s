@@ -89,7 +89,9 @@ CREATE TABLE VisitorReservation (
             VisitorID INTEGER,
             ReservationID INTEGER,
             Primary Key(VisitorID, ReservationID),
-            FOREIGN Key (VisitorID) references Visitors,
+            FOREIGN Key (VisitorID) references Visitors
+            ON Delete Cascade
+            ON Update Cascade,
             Foreign Key (ReservationID) references Reservation
             ON Delete Cascade
             ON Update Cascade
