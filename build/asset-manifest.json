@@ -1,0 +1,40 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3be20dbb.chunk.css",
+    "main.js": "/static/js/main.9eb2fb57.chunk.js",
+    "main.js.map": "/static/js/main.9eb2fb57.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.adea4b50.js",
+    "runtime-main.js.map": "/static/js/runtime-main.adea4b50.js.map",
+    "static/css/2.661b9127.chunk.css": "/static/css/2.661b9127.chunk.css",
+    "static/js/2.741e9853.chunk.js": "/static/js/2.741e9853.chunk.js",
+    "static/js/2.741e9853.chunk.js.map": "/static/js/2.741e9853.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.e9076094bea61142c14b74cf3626be64.js": "/precache-manifest.e9076094bea61142c14b74cf3626be64.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.661b9127.chunk.css.map": "/static/css/2.661b9127.chunk.css.map",
+    "static/css/main.3be20dbb.chunk.css.map": "/static/css/main.3be20dbb.chunk.css.map",
+    "static/js/2.741e9853.chunk.js.LICENSE.txt": "/static/js/2.741e9853.chunk.js.LICENSE.txt",
+    "static/media/PosterPic.jpg": "/static/media/PosterPic.8153027e.jpg",
+    "static/media/azureLogo.svg": "/static/media/azureLogo.c5025422.svg",
+    "static/media/bed3.jpg": "/static/media/bed3.e31c89fa.jpg",
+    "static/media/bed4.jpg": "/static/media/bed4.349ac79f.jpg",
+    "static/media/bed5.jpg": "/static/media/bed5.f12f1608.jpg",
+    "static/media/bedKing.jpg": "/static/media/bedKing.372855c8.jpg",
+    "static/media/expressLogo.svg": "/static/media/expressLogo.9de32921.svg",
+    "static/media/insta.png": "/static/media/insta.a0d02930.png",
+    "static/media/materializeLogo.png": "/static/media/materializeLogo.0df3ec68.png",
+    "static/media/nodejsLogo.png": "/static/media/nodejsLogo.4c6c0929.png",
+    "static/media/parallex1.jpg": "/static/media/parallex1.a2012b1e.jpg",
+    "static/media/parallex2.jpg": "/static/media/parallex2.90ec42b9.jpg",
+    "static/media/postgreslogo.png": "/static/media/postgreslogo.8bac5bb6.png",
+    "static/media/reactjsLogo.svg": "/static/media/reactjsLogo.70384772.svg",
+    "static/media/tl.mp4": "/static/media/tl.7edaedad.mp4"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.adea4b50.js",
+    "static/css/2.661b9127.chunk.css",
+    "static/js/2.741e9853.chunk.js",
+    "static/css/main.3be20dbb.chunk.css",
+    "static/js/main.9eb2fb57.chunk.js"
+  ]
+}
