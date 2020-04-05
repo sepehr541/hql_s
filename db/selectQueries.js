@@ -34,27 +34,6 @@ const FindingAvailableRooms = async (start, end, people) => {
     }
 }
 
-/**
- * return all rooms with their associated reservations
- */
-const RoomsResvDates = async () => {
-    const result = await pool.query(
-        `select room.id roomnumber, res.startDate, res.endDate, room.capacity capacity
-        from room, reservation res, reservationroom rr
-        where room.id = rr.roomnumber
-            AND res.reservationid = rr.reservationid`
-    )
-    console.log("Room,     StartDate,   EndDate,     Cap")
-    result.rows.forEach(({ roomnumber, startdate, enddate, capacity }) => {
-        console.log(roomnumber,
-            ' '.repeat(8 - roomnumber.toString().length),
-            moment(startdate).format('YYYY-MM-DD'), ' ', moment(enddate).format('YYYY-MM-DD'),
-            "  ", capacity)
-    })
-}
-// TESTING
-// RoomsResvDates()
-// FindingAvailableRooms('2020-04-10', '2020-04-11', 1)
 
 
 const getFromDB = async (query) => {
