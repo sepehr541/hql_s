@@ -46,7 +46,6 @@ const insertUsernamePassword = async (username, password) => {
         console.log(error);
     }
 }
-// insertUsernamePassword('amir2211','sex221177')
 
 
 
@@ -61,6 +60,8 @@ const forgotPassword = async (username, password) => {
         console.log(e)
     }
 }
+
+//insertUsernamePassword('passwordchange', '1234');
 
 module.exports = {
     authenticate,
