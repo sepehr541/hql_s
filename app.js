@@ -21,7 +21,7 @@ var app = express();
 dotnv.config()
 app.set('view engine', 'jade')
 app.use(express.static(path.join(__dirname, 'build')));
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 app.set('views', path.join(__dirname, 'views'));

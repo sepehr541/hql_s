@@ -234,9 +234,37 @@ const getRoomWithEssentials=async()=>{
     return obj
 
 }
-getRoomWithEssentials()
+// getRoomWithEssentials()
 
 // getStats()
+
+
+const projectEmp = async (columns) => {
+    console.log(columns.length);
+    let column = [...columns]
+    var select = ''
+    if (column.length = 0){
+        select = "*"
+    } else {
+        console.log(columns);
+        for (let i = 0; i < columns.length; i++){
+            if (i === 0) {
+                select += (columns[0])
+
+            } else {
+                select = select.concat(`, ${columns[i]}`);
+            }
+        }
+    }
+
+    let queryResult = await pool.query(`
+    SELECT ${select} 
+    FROM employees
+    `);
+
+    //console.log(queryResult.rows);
+    return queryResult.rows;
+}
 
 module.exports = {
     FindingAvailableRooms,
@@ -248,5 +276,6 @@ module.exports = {
     getEmployeeWithID,
     getSearchFromDB,
     getStats,
-    getRoomWithEssentials
+    getRoomWithEssentials,
+    projectEmp,
 }

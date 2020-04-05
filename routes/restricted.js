@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const jwtKey = require('../auth/jwtkey');
-const { getEmployees, getReservations, getRooms, getEvents, getSearchFromDB, getStats ,getRoomWithEssentials } = require('../db/selectQueries');
+const { getEmployees, getReservations, getRooms, getEvents, getSearchFromDB, getStats, getRoomWithEssentials, projectEmp } = require('../db/selectQueries');
 const { insertEvent, insertEmployee, insertRoom } = require('../db/insertQueries');
 const { deleteEmployee, deleteResv, deleteEvent, deleteRoom } = require('../db/deleteQueries');
 const router = express.Router();
@@ -29,11 +29,11 @@ router.get('/', async (req, res) => {
     res.send('Token valid')
 })
 
-router.get('/essentials', async(req,res)=>{
-    try{
-        const allrooms=await getRoomWithEssentials()
+router.get('/essentials', async (req, res) => {
+    try {
+        const allrooms = await getRoomWithEssentials()
         res.send(allrooms)
-    }catch(e){
+    } catch (e) {
         res.status(404)
         console.log(e)
         res.send('No data available right now')
@@ -49,7 +49,7 @@ router.get('/stats', async (req, res, next) => {
     } catch (error) {
         console.log('im here')
         console.log(error);
-        if(error.message=='No data found'){
+        if (error.message == 'No data found') {
             res.status(404).send('No data found')
         }
         next(error)
@@ -219,8 +219,17 @@ router.patch('/visitors', async (req, res, next) => {
 });
 
 router.delete('/visitors', async (req, res, next) => {
-    
+
 });
+
+router.post('/proj', async (req, res, next) => {
+    const data = [...req.body]
+    try {
+        res.send(await projectEmp([...data]))
+    } catch (error) {
+        next(error)
+    }
+})
 
 module.exports = {
     router,
