@@ -13,3 +13,5 @@ public/auth/jwtkey.js
 /build
 .gitignore
 .env
+
+/build/
